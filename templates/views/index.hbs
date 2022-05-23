@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {{>head}}
+
+<body>
+    <!-- ==================Navigation Started================================== -->
+    {{>navbar}}
+    <!-- ==========================Navigatioin Ended================================ -->
+    <div class="container ">
+        <div class="text-center  my-3">
+            <img src="/images/bgnew.jpeg" class="container-fluid" alt="">
+        </div>
+    </div>
+    <div class="topic text-center mx-auto my-2">
+        <h1 class="topictitle text-secondary">Our <span class="text-success">Products</span></h1>
+    </div>
+    <div class="text-center mx-auto px-3 mt-3">
+        <p> Hello there , we are dedicated to deliver fresh and natural mangoes which are grown chemical free to your
+            door step. We provide all variety of mangoes to our customers.</p>
+    </div>
+    {{>productCard}}
+    <div class="">
+        <div class="topic text-center mx-auto my-2">
+            <h1 class="topictitle text-secondary">Products <span class="text-warning">On Demand</span> </h1>
+        </div>
+        <div class="text-center mx-auto px-3 mt-3">
+            <p> Hello there , we are also dedicated to deliver fresh, natural and handmade products which we made on
+                demand to maintain its natural freshness and hygiene without using chemicals . Feel free to whatsapp Us
+                and Demand
+                our very natural , fresh and chemical free products. We are very dedicated to deliver products to our
+                customers fresh and chemical free. </p>
+        </div>
+    </div>
+
+    {{>demandProducts}}
+    {{>demandProductPopulate}}
+    <div class="whatsappTool ">
+        <a class="nav-link align-middle"
+            href="https://wa.me/+919113762945/?text=Hello%20there.%20I%20need%20your%20help." target="_blank"><i
+                class="fa-brands fa-whatsapp"></i> Chat</a>
+    </div>
+    {{>footer}}
+    {{>cdnscript}}
+</body>
+
+</html>

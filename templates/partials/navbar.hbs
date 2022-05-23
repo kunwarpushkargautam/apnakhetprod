@@ -1,0 +1,53 @@
+    <nav class="navbar navbar-expand-lg navbar-light bg-light nav sticky-top py-2">
+        <div class="container-fluid">
+
+            <button class="navbar-toggler p-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasWithBothOptions" aria-controls=" " aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon "></span>
+            </button>
+            <h1 class="navbar-brand my-0 mx-auto title p-0"><img src="" width="60px">Apna Khet</h1>
+            <a class="nav-link cartnum d-lg-none" id="cartInMobile" aria-current="page"  href="/cart"><i class="fa-solid fa-cart-shopping text-warning"></i> <sup class="cartnumcount text-sucess"> 0</sup></a>
+            <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+                <div class="navbar-nav ms-auto">
+                    <a class="nav-link   " aria-current="page" href="/index">Home</a>
+                    <a class="nav-link   " aria-current="page" id="phoneprofile" href="/shop">Shop</a>
+                    <a class="nav-link cartnum  " aria-current="page"  href="/cart">Cart <i class="fa-solid fa-cart-shopping text-warning"></i> <sup class="cartnumcount text-success"> 0</sup></a>
+                    <a class="nav-link  " href="/gallery">Gallery</a> 
+                    <a class="nav-link  " href="/about">About</a> 
+                    <a class="nav-link  " href="/help">Help</a>
+
+
+                </div>
+            </div>
+        </div>
+ 
+    </nav>
+
+    <div class="offcanvas offcanvas-width" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions"
+        aria-labelledby="offcanvasWithBothOptionsLabel">
+        <div class="offcanvas-header">
+            <h4 class="offcanvas-title h4 text-secondary" id="offcanvasWithBothOptionsLabel"><a href="/index"><img src="/images/logo.png" width="70px" alt=""> </a> </h4>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body ">
+
+            <div class="navbar-nav h5">
+                <a class="nav-link text-secondary border-bottom border-0  text-center mx-2" aria-current="page"
+                    href="/index">Home</a>
+                <a class="nav-link text-secondary border-bottom border-0  text-center mx-2" aria-current="page" href="/shop"
+                    id="webprofile">Shop</a>
+                <a class="nav-link cartnum text-secondary border-bottom border-0  text-center mx-2" aria-current="page" href="/cart"
+                    >Cart<i class="fa-solid fa-cart-shopping text-warning"></i> <sup class="cartnumcount text-success"> 0</sup></a>
+                <a class="nav-link text-secondary border-bottom border-0  text-center mx-2" href="/gallery">Gallery</a>
+                <a class="nav-link text-secondary border-bottom border-0  text-center mx-2" href="/about">About</a>
+                <a class="nav-link text-secondary border-bottom border-0  text-center mx-2" href="/help">Help</a>
+                <!-- <a class="nav-link text-danger border-bottom border-0  text-center mx-2" id="weblogout"
+                    href="/logout">Logout</a>
+                <a class="nav-link text-danger border-bottom border-0  text-center mx-2" id="weblogin"
+                    href="/login">Login</a> -->
+
+            </div>
+        </div>
+
+    </div>

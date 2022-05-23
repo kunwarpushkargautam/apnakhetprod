@@ -1,0 +1,59 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<!-- bootstrap bundelled script -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script>
+  const cipher = salt => {
+    const textToChars = text => text.split('').map(c => c.charCodeAt(0));
+    const byteHex = n => ("0" + Number(n).toString(16)).substr(-2);
+    const applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code);
+
+    return text => text.split('')
+      .map(textToChars)
+      .map(applySaltToChar)
+      .map(byteHex)
+      .join('');
+}
+    
+const decipher = salt => {
+    const textToChars = text => text.split('').map(c => c.charCodeAt(0));
+    const applySaltToChar = code => textToChars(salt).reduce((a,b) => a ^ b, code);
+    return encoded => encoded.match(/.{1,2}/g)
+      .map(hex => parseInt(hex, 16))
+      .map(applySaltToChar)
+      .map(charCode => String.fromCharCode(charCode))
+      .join('');
+}
+var mySecretSalt = 'kunwarpushkargautam';
+// To create a cipher
+const myCipher = cipher(mySecretSalt)
+
+//// Then cipher any text:
+//console.log(myCipher('the secret string'))
+
+//To decipher, you need to create a decipher and use it:
+const myDecipher = decipher(mySecretSalt)
+////console.log(myDecipher("7c606d287b6d6b7a6d7c287b7c7a61666f"))
+</script>
+<script>
+  //reading cookie function
+  function check_cookie_name(name) {
+    var match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+    if (match) {
+      console.log(match[2]);
+      return match[2];
+    }
+    else {
+      return '--something went wrong---';
+    }
+  }
+
+  const setCookie = (cname, cvalue, exday) => {
+    console.log("setting cookie");
+    const d = new Date();
+    d.setTime(d.getTime() + (exday * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+  }
+</script>
+<script src="/main.js"></script>

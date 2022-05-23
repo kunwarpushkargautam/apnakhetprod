@@ -1,0 +1,152 @@
+<script type="text/javascript">
+    {{!-- const setCookie = (cname, cvalue, exday) => {
+        console.log("setting cookie");
+        const d = new Date();
+        d.setTime(d.getTime() + (exday * 24 * 60 * 60 * 1000));
+        let expires = "expires=" + d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    } --}}
+
+    var newtotalamt;
+    let code1 = document.getElementById('discountCode1');
+    let error_trw = document.getElementById('error_trw');
+    var shipChargeCondi = document.getElementById('shipChargeCondi');
+    var product_total_amt = document.getElementById('product_total_amt');
+    var shipping_charge = document.getElementById('shipping_charge');
+    var total_cart_amt = document.getElementById('total_cart_amt');
+    var discountCode = document.getElementById('discount_code1');
+    var discounted_amount = document.getElementById("total_cart_amt_discount");
+    var cartCounter = document.getElementById("inCartCounter");
+    total_cart_amt.innerText = parseInt(product_total_amt.innerText) + parseInt(shipping_charge.innerText);
+    //localStorage.setItem("codeApplied", false);
+    setCookie('amount',total_cart_amt.innerText,1);
+    let recoverTotalAmount = parseInt(product_total_amt.innerText);
+    console.log("1", recoverTotalAmount);
+
+
+    const decreaseNumber = (indAndPrice) => {
+        var arr = indAndPrice.split('a');
+        var incdec = 'textbox' + arr[0];
+        var itemprice = 'itemval' + arr[0];
+        let cartItems = localStorage.getItem("productInCarts");
+
+        cartItems = JSON.parse(cartItems);
+
+        console.log("hi i am id of textbox", incdec);
+
+        var itemval = document.getElementById(incdec);
+        var itemprice = document.getElementById(itemprice);
+        let itemCountValue = itemval.value;
+
+
+        if (itemCountValue < 2) {
+            console.log("i enterd here for deletion");
+            removeItem(arr[0]);
+            //alert('Negative quantity not allowed');
+        } else {
+            cartNumbersMinus(productsInCartList[arr[0]]);
+            itemval.value = parseInt(itemval.value) - 1;
+            itemval.style.background = '#fff';
+            itemval.style.color = '#000';
+            itemprice.innerText = parseInt(itemprice.innerText) - parseInt(arr[1]);
+            product_total_amt.innerText = parseInt(product_total_amt.innerText) - parseInt(arr[1]);
+            total_cart_amt.innerText = parseInt(product_total_amt.innerText) + parseInt(shipping_charge.innerText);
+        }
+        let cartno = localStorage.getItem("cartNumbers");
+        recoverTotalAmount = parseInt(product_total_amt.innerText)
+        console.log("2", recoverTotalAmount);
+        total_cart_amt.innerText = parseInt(product_total_amt.innerText) + parseInt(shipping_charge.innerText);
+        cartCounter.innerText = `Total Items : ${cartno}`;
+        removeDiscountApply();
+    }
+    const increaseNumber = (indAndPrice) => {
+        console.log(indAndPrice);
+        var arr = indAndPrice.split('a');
+
+        var incdec = 'textbox' + arr[0];
+        var itemprice = 'itemval' + arr[0];
+        var itemval = document.getElementById(incdec);
+        var itemprice = document.getElementById(itemprice);
+
+        let cartItems = localStorage.getItem("productInCarts");
+        cartItems = JSON.parse(cartItems);
+        cartNumbers(productsInCartList[arr[0]]);
+        itemval.value = parseInt(itemval.value) + 1;
+        itemprice.innerText = parseInt(itemprice.innerText) + parseInt(arr[1]);
+        product_total_amt.innerText = parseInt(product_total_amt.innerText) + parseInt(arr[1]);
+        total_cart_amt.innerText = parseInt(product_total_amt.innerText) + parseInt(shipping_charge.innerText);
+        let cartno = localStorage.getItem("cartNumbers");
+        cartCounter.innerText = `Total Items : ${cartno}`;
+        recoverTotalAmount = parseInt(product_total_amt.innerText);
+        console.log("3", recoverTotalAmount);
+        removeDiscountApply();
+    }
+    const discount_code = () => {
+        let totalamtcurr = parseInt(product_total_amt.innerText);
+        console.log(totalamtcurr)
+        if (discountCode.value === "") {
+            discountCode.value = code1.innerText;
+        }
+
+        if (discountCode.value === 'AKMCO25F') {
+            document.getElementById("discountLabel").classList.remove("d-none");
+            discounted_amount.innerText = 0.25 * totalamtcurr;
+            newtotalamt = parseInt(product_total_amt.innerText) - 0.25 * totalamtcurr;
+            error_trw.innerText = "Hurray! code Applied";
+            code1.parentNode.classList.add("valid");
+        } else {
+            error_trw.innerText = "Try Again! Invalid code ";
+            code1.classList.add("invalid");
+        }
+
+        shipCharge();
+    }
+
+
+
+    const apply_code = () => {
+        console.log("activated", discountCode.value);
+
+        let totalamtcurr = parseInt(product_total_amt.innerText);
+        console.log(totalamtcurr)
+
+        let inpCode = document.getElementById('discount_code1');
+
+        if (discountCode.value === 'AKMCO25F') {
+            document.getElementById("discountLabel").classList.remove("d-none");
+            discounted_amount.innerText = 0.25 * totalamtcurr;
+            newtotalamt = parseInt(product_total_amt.innerText) - 0.25 * totalamtcurr;
+            error_trw.innerText = "Hurray! code Applied";
+            code1.parentNode.classList.add("valid");
+        } else {
+            error_trw.innerText = "Try Again! Invalid code ";
+            code1.parentNode.classList.remove("valid");
+            discountCode.value = "";
+        }
+        shipCharge();
+    }
+
+    const shipCharge = () => {
+        if (newtotalamt >= 1000) {
+            total_cart_amt.innerText = newtotalamt;
+            shipping_charge.innerText = "0"
+        } else if (newtotalamt < 1000) {
+            newtotalamt = newtotalamt + parseInt(shipping_charge.innerText);
+            total_cart_amt.innerText = newtotalamt;
+        }
+        setCookie('amount',newtotalamt,1);
+    }
+    const removeDiscountApply = () => {
+        document.getElementById("discountLabel").classList.add("d-none");
+        shipping_charge.innerText = "100";
+        discountCode.value = code1.innerText;
+        discountCode.value = "";
+        error_trw.innerText = "check And Apply Code";
+        code1.parentNode.classList.remove("valid");
+        total_cart_amt.innerText = recoverTotalAmount + parseInt(shipping_charge.innerText);
+        setCookie('amount',total_cart_amt.innerText,1);
+    }
+
+
+
+</script>

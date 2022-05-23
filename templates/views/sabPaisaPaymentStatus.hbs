@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {{>head}}
+
+<body>
+    <!-- ==================Navigation Started================================== -->
+    {{>navbar}}
+    <!-- ==========================Navigatioin Ended================================ -->
+    <!-- ==========================About Start================================ -->
+    <div class="container row justify-content-center mx-auto">
+        <div class="col-11 col-md-8 my-3">
+            <h1 class="text-center">Transaction Details</span></h1>
+            <table class="table table-sm table-striped border table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Parameter</th>
+                        <th scope="col">Value</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>Timestamp</td>
+                        <td>{{sabPaisaResparams.transDate}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>PG Txn No.</td>
+                        <td>{{sabPaisaResparams.PGTxnNo}}</td>
+                    </tr>
+                    <tr>
+                        <td>Sab Paisa TxId</td>
+                        <td>{{sabPaisaResparams.SabPaisaTxId}}</td>
+                    </tr>
+                    <tr>
+                        <td>Customer Name</td>
+                        <td>{{sabPaisaResparams.firstName}} {{sabPaisaResparams.lastName}}</td>
+                    </tr>
+                    <tr>
+                        <td>Mobile Number</td>
+                        <td>{{sabPaisaResparams.mobileNo}}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td>{{sabPaisaResparams.email}}</td>
+                    </tr>
+                    <tr>
+                        <td>Status</td>
+                        <td>{{sabPaisaResparams.spRespStatus}}</td>
+                    </tr>
+                    <tr>
+                        <td>Amount Deducted</td>
+                        <td>₹ {{sabPaisaResparams.amount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Original Amount</td>
+                        <td>₹ {{sabPaisaResparams.orgTxnAmount}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-11 col-md-8 text-center"><a href="/" class="btn border ">Go Home</a></div>
+        
+
+
+
+    </div>
+
+
+    <!-- ==========================About Ended================================ -->
+
+
+
+    {{>footer}}
+    {{>cdnscript}}
+
+</body>
+
+</html>

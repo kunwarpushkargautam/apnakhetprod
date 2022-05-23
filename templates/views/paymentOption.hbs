@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{{>head}}
+
+<body>
+
+
+    <div class="container   my-5">
+
+        <div class="row  justify-content-center">
+            <div class="col-11 col-md-5 shadow py-4">
+                <h3 class="text-center ">
+                    <span class="text-success">Payment</span> <span class="">Options</span>
+                </h3>
+                <div class="align-items-center mx-auto d-flex flex-column">
+
+
+                    <a href="" class="mx-auto swbtn my-2 border btnshadow curve  text-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal2">
+                        <div class="d-flex  my-2 align-items-center" id="">{{!-- actSabPaisa --}}
+                            
+                            <h5 class="mb-0 mx-auto"> <span class="orange">Sab</span><span
+                                    class="text-dark">Paisa</span> </h5>
+
+                        </div>
+                    </a>
+                    <a href="/paytmcheckout" id="paytmGateway"
+                        class="swbtn my-2 mx-auto border btnshadow paytm curve  ">
+                        <div class="d-flex  my-2 align-items-center">
+                            <h5 class="mb-0 mx-auto">Pay<span style="color: #02B9EF;">tm</span> </h5>
+
+                        </div>
+                    </a>
+                    <a href="" id="rzp-button1" class="swbtn my-2 border mx-auto  curve btnshadow ">
+                        <div class="d-flex  my-2 align-items-center">
+                            <h5 class="mb-0 fst-italic mx-auto">RazorPay</h5>
+
+                        </div>
+                    </a>
+                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                        class="mx-auto swbtn my-2 curve btnshadow curve px-0 text-secondary">
+                        <div class="d-flex  gpay align-items-center">
+                            <h5 class="mb-0 mx-auto" id="buy-now">Google Pay
+                            </h5>
+
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">GPay coming soon!!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Hii , we are coming soon with Google Pay payment gateway. Till then use RazorPay
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">SabPaisa coming soon!!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Hii , we are coming soon with SabPaisa  payment gateway.we are currently testing it, Till then use RazorPay
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{!-- {{>footer}} --}}
+    {{>cdnscript}}
+
+
+
+    <script>
+        document.getElementById('rzp-button1').onclick = async function (e) {
+            e.preventDefault();
+            console.log("hii");
+            let razorpay_payment_id;
+            let razorpay_order_id;
+            let razorpay_signature;
+            let keyId = check_cookie_name('customerKey');
+
+            //console.log("decypher keyid from cookie razorpay==>", keyId)
+            const response = await fetch('/razorpayOrder/payment/order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ keyId })
+            });
+            let orderData = await response.json();
+            //console.log("this is razorpay data==>", orderData.key);
+
+            //console.log(orderData.fname, orderData.phone, orderData.email);
+            var options = {
+                "key": orderData.key,
+                "amount": orderData.tamount * 100,
+                "currency": "INR",
+                "name": "Apna Khet Bagan Foundation",
+                "description": "Order transaction",
+                "order_id": orderData.id,
+                "handler":async function (response) {
+                    //console.log("razor pay response-->", response)
+                    {{!-- alert(response.razorpay_payment_id);
+                    alert(response.razorpay_order_id);
+                    alert(response.razorpay_signature); --}}
+                    razorpay_payment_id = response.razorpay_payment_id;
+                    razorpay_order_id = response.razorpay_order_id;
+                    razorpay_signature = response.razorpay_signature;
+                    const razorResponse = await fetch('/razorpay/response', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ razorpay_payment_id, razorpay_order_id, razorpay_signature,email:orderData.email,mailitems:orderData.productArrayMail,amount:orderData.tamount,phone:orderData.phone})
+                    });
+                    
+                   // console.log("this is ", razorpay_payment_id, razorpay_order_id, razorpay_signature)
+                    //let razorResponseData = await razorResponse.json();
+                    
+                },
+                "prefill": {
+                    "name": orderData.fname,
+                    "email": orderData.email,
+                    "contact": orderData.phone
+                },
+            };
+
+            var rzp1 = new Razorpay(options);
+            rzp1.on('payment.failed', function (response) {
+                alert(response.error.code);
+                alert(response.error.description);
+                alert(response.error.source);
+                alert(response.error.step);
+                alert(response.error.reason);
+                alert(response.error.metadata.order_id);
+                alert(response.error.metadata.payment_id);
+            });
+            rzp1.open();
+
+
+        }
+
+
+    </script>
+    <script>
+        document.getElementById('actSabPaisa').onclick = async function (e) {
+            e.preventDefault();
+            console.log("hii");
+
+            let keyId = check_cookie_name('customerKey');
+
+            //console.log("decypher keyid from cookie sabPaisa==>", keyId)
+
+
+            const sabPaisaResponse = await fetch('/sabPaisa', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ keyId })
+            });
+            let resSabPaisa = await sabPaisaResponse.json();
+            let furl = resSabPaisa.spURl;
+            console.log(resSabPaisa);
+        }
+    </script>
+
+    {{!--
+    <script src="/gpay.js"></script> --}}
+    {{!--
+    <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script> --}}
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <body>
+
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {{>head}}
+
+<body>
+    <!-- ==================Navigation Started================================== -->
+    {{>navbar}}
+    <div class="row   justify-content-center">
+        <div class="col-11 col-lg-8 shadow my-4">
+            <div class="mb-4 mt-2 p-2  text-center bg-warning">
+                <h5 class="  my-0  ">Address of Shipment</h5>
+            </div>
+            <form action="/saveAddress" method="POST">
+                <div class="row  my-2 mx-auto justify-content-center">
+
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">Full Name</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="Full Name" name="fullname"
+                            required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">Whatsapp</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="tel" placeholder="" name="whatsapp" required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">Email</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="email" placeholder="xyz@abc.com"
+                            name="custEmail" required>
+                    </div>
+                </div>
+
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">House no.</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="Enter address" name="house"
+                            required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">street</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="Enter address"
+                            name="street" required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">Landmark</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="Enter address"
+                            name="landmark" required>
+                    </div>
+                </div>
+
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">Pincode</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="Pin Code"
+                            name="postPinCode" required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">city</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="" name="postCity">
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center">
+                    <div class="col-12 col-md-3 col-lg-3  col-xl-2">
+                        <p class=" py-1 my-0 h6  px-2">State</p>
+                    </div>
+                    <div class="col-12 col-md-7 col-lg-8 h-100 border-0 col-xl-6">
+                        <input class="w-100 py-1 border curve px-2" type="text" placeholder="" name="postState"
+                            required>
+                    </div>
+                </div>
+                <div class="row  my-2 mx-auto justify-content-center ">
+                    <button type="submit" value="submit" class="col-11 col-md-6 btncustom2 text-white my-3 shadow"
+                        onclick="saveCart();">Save &
+                        Proceed to Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    {{>footer}}
+    {{>cdnscript}}
+
+    <script>
+        async function saveCart() {
+            var fullname = document.getElementsByName("fullname")[0].value;
+            var whatsapp = document.getElementsByName("whatsapp")[0].value;
+            var custEmail = document.getElementsByName("custEmail")[0].value;
+            var house = document.getElementsByName("house")[0].value;
+            var street = document.getElementsByName("street")[0].value;
+            var landmark = document.getElementsByName("landmark")[0].value;
+            var postPinCode = document.getElementsByName("postPinCode")[0].value;
+            var postCity = document.getElementsByName("postCity")[0].value;
+            var postState = document.getElementsByName("postState")[0].value;
+            console.log("working till here")
+            let totalCost = await check_cookie_name('amount')
+            totalCost = parseInt(totalCost)
+            console.log("this is cookie data===> ", typeof (totalCost));
+            var cartNumberCheck = localStorage.getItem("cartNumbers");
+            console.log("cartNumberCheck", cartNumberCheck)
+            //if (cartNumberCheck != null && cartNumberCheck != 0) {
+            if (fullname != "" && custEmail != "" && whatsapp != "" && postPinCode != "" && house != "" && landmark != "") {
+
+                var keytoday = new Date();
+                var keyday = String(keytoday.getDate()).padStart(2, '0');
+                var keymonth = String(keytoday.getMonth() + 1).padStart(2, '0'); //January is 0!
+                var keyyear = keytoday.getFullYear();
+                var keydate = keyyear + keymonth + keyday;
+                var keytime = keytoday.getTime();
+                var cartObj = {};
+                var cartArr = [];
+                let oriTotalCost = 0;
+                let totalCart = 0;
+
+                var productsInCart = localStorage.getItem("productInCarts");
+                productsInCart = JSON.parse(productsInCart);
+                if (productsInCart !== null) {
+
+                    var productsInCartList = Object.keys(productsInCart).map((key) => {
+                        return productsInCart[key];
+                    });
+                } else {
+                    productsInCartList = []
+                }
+
+                for (let i = 0; i < productsInCartList.length; i++) {
+                    cartObj.productName = productsInCartList[i].name;
+                    cartObj.incart = productsInCartList[i].incart;
+                    cartObj.cost = productsInCartList[i].price;
+                    cartArr.push(cartObj)
+                    cartObj = {}
+                }
+                for (let i = 0; i < cartArr.length; i++) {
+                    oriTotalCost = oriTotalCost + (cartArr[i].cost * cartArr[i].incart)
+                    console.log(oriTotalCost)
+                    totalCart = totalCart + cartArr[i].incart;
+                    console.log(totalCart)
+                }
+                localStorage.setItem("totalCost", totalCost);
+                localStorage.setItem("oriTotalCost", oriTotalCost);
+                localStorage.setItem("cartNumbers", totalCart);
+                var customerKey = custEmail + keydate + keytime;
+                customerKey = myCipher(customerKey);
+                console.log("cipher ===>", myCipher(customerKey));
+                ////console.log("decipher ===>",myDecipher(cypher));
+
+                setCookie('customerKey', customerKey, 10);
+                localStorage.setItem("customerKey", customerKey);
+                localStorage.setItem("fname", fullname);
+                localStorage.setItem("phone", whatsapp);
+                localStorage.setItem("email", custEmail);
+                console.log("This is cartArr", cartArr);
+                var cartDataObj = Object.assign({}, cartArr);
+                console.log("this is cart sent in backend", cartDataObj)
+                var ObjSend = { fullname, whatsapp, custEmail, house, street, landmark, postPinCode, postCity, postState, oriTotalCost, totalCost, totalCart, cartDataObj, customerKey }
+                console.log(customerKey);
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(ObjSend)
+                };
+                const response = await fetch('/saveAddressandCart', options).then(res => {
+                    localStorage.removeItem("productInCarts")
+                    localStorage.setItem("totalCost",0)
+                    localStorage.setItem("cartNumbers",0)
+                });
+
+            } else {
+                console.log("fill all details")
+            }
+        }
+    </script>
+</body>
+
+</html>

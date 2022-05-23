@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {{>head}}
+
+<body>
+    <!-- ==================Navigation Started================================== -->
+    {{>navbar}}
+    <!-- ==========================Navigatioin Ended================================ -->
+
+    <div class="topic text-center mx-auto my-2">
+        <h1 class="topictitle text-secondary">Our <span class="text-success">Products</span></h1>
+    </div>
+    {{>productCard}}
+    <div class="topic text-center mx-auto my-2">
+        <h1 class="topictitle text-secondary">Products <span class="text-warning">On Demand</span> </h1>
+    </div>
+    <div class="text-center mx-auto px-3">
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus, doloremque hic, suscipit ab neque
+            aspernatur minima voluptates exercitationem doloribus a delectus mollitia rerum, explicabo dolore eligendi
+            officiis minus odit! Quis!</p>
+    </div>
+    {{>demandProducts}}
+    {{>demandProductPopulate}}
+    <div class="whatsappTool ">
+        <a class="nav-link align-middle"
+            href="https://wa.me/+919113762945/?text=Hello%20there.%20I%20need%20your%20help." target="_blank"><i
+                class="fa-brands fa-whatsapp"></i> Chat</a>
+    </div>
+    {{>footer}}
+    {{>cdnscript}}
+
+</body>
+
+</html>

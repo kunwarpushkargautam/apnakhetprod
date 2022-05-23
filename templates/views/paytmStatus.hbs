@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {{>head}}
+
+<body>
+    <!-- ==================Navigation Started================================== -->
+    {{>navbar}}
+    <!-- ==========================Navigatioin Ended================================ -->
+    <!-- ==========================About Start================================ -->
+    <div class="container row justify-content-center mx-auto">
+        <div class="col-11 col-md-8 my-3">
+            <h1 class="text-center">Transaction Details</span></h1>
+            <table class="table table-sm table-striped border table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">Parameter</th>
+                        <th scope="col">Value</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+
+                        <td>Timestamp</td>
+                        <td>{{parsedResponse.body.txnDate}}</td>
+
+                    </tr>
+                    <tr>
+                        <td>Order Id</td>
+                        <td>{{parsedResponse.body.orderId}}</td>
+                    </tr>
+                    <tr>
+                        <td>Paytm transacId</td>
+                        <td>{{parsedResponse.body.txnId}}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td>Status</td>
+                        <td>{{parsedResponse.body.resultInfo.resultMsg}}</td>
+                    </tr>
+                    <tr>
+                        <td>Amount Deducted</td>
+                        <td>₹ {{parsedResponse.body.txnAmount}}</td>
+                    </tr>
+                    <tr>
+                        <td>Card Name</td>
+                        <td>{{parsedResponse.body.cardScheme}}</td>
+                    </tr>
+                    <tr>
+                        <td>Payment Mode</td>
+                        <td>{{parsedResponse.body.paymentMode:}}</td>
+                    </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+        <div class="col-11 col-md-8 text-center"><a href="/" class="btn border ">Go Home</a></div>
+        
+
+
+
+    </div>
+
+
+    <!-- ==========================About Ended================================ -->
+
+
+
+    {{>footer}}
+    {{>cdnscript}}
+
+</body>
+
+</html>

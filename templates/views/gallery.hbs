@@ -7,63 +7,20 @@
     <style>
         h1 {
             font-family: Satisfy;
-            font-size: 50px;
+            font-size: 25px;
             text-align: center;
             color: black;
             padding: 1%;
         }
-
-        #gallery {
-            -webkit-column-count: 3;
-            -moz-column-count: 3;
-            column-count: 3;
-
-            -webkit-column-gap: 30px;
-            -moz-column-gap: 30px;
-            column-gap: 30px;
+       
+        .gallery {
+            
+            max-height: 12rem;
+            overflow: hidden;
         }
-
-        @media (max-width:1200px) {
-            #gallery {
-                -webkit-column-count: 3;
-                -moz-column-count: 3;
-                column-count: 3;
-
-                -webkit-column-gap: 20px;
-                -moz-column-gap: 20px;
-                column-gap: 20px;
-            }
-        }
-
-        @media (max-width:800px) {
-            #gallery {
-                -webkit-column-count: 2;
-                -moz-column-count: 2;
-                column-count: 2;
-
-                -webkit-column-gap: 20px;
-                -moz-column-gap: 20px;
-                column-gap: 20px;
-            }
-        }
-
-        @media (max-width:600px) {
-            #gallery {
-                -webkit-column-count: 1;
-                -moz-column-count: 1;
-                column-count: 1;
-            }
-        }
-
-        #gallery img,
-        #gallery video {
-            width: 100%;
-            height: auto;
-            margin: 4% auto;
-            box-shadow: -3px 5px 15px #000;
-            cursor: pointer;
-            -webkit-transition: all 0.2s;
-            transition: all 0.2s;
+        .gallery img{
+            background-size: cover;
+            background-position: center;
         }
 
         .modal-img,
@@ -74,36 +31,62 @@
 
         .modal-body {
             padding: 0px;
-            
+
         }
     </style>
 
 <body>
     {{>navbar}}
-    <h1 class="bg-success text-white">Our Images</h1>
-
-    <div id="gallery" class="container-fluid">
-        <img src="/images/man1.jpg" class="img-responsive" data-bs-toggle="modal" data-bs-target="#myModal">
-        <img src="/images/man3.jpg" class="img-responsive" data-bs-toggle="modal" data-bs-target="#myModal">
-        <video class="vid" data-bs-toggle="modal" data-bs-target="#myModal" autoplay muted controls>
-            <source src="/images/vid1.mp4"
-                type="video/mp4">
-            </source>
-        </video>
-        <img src="/images/man2.jpg" class="img-responsive" data-bs-toggle="modal" data-bs-target="#myModal">
-        <img src="/images/man4.jpg"   class="img-responsive" data-bs-toggle="modal" data-bs-target="#myModal">
-        <img src="/images/man5.jpg"   class="img-responsive" data-bs-toggle="modal" data-bs-target="#myModal">
-                <video class="vid" data-bs-toggle="modal" data-bs-target="#myModal" autoplay muted controls>
-            <source src="/images/vid2.mp4"
-                type="video/mp4">
-            </source>
-        </video>
-        <div class=" border shadow curve ">
-        <a href="/news" class=""><h1 class=" mb-0 p-3">Click to See Our News And Articles</h1></a>
+    <div class="mx-auto">
+        <h3 class="my-3 bg-warning text-center py-2  mx-5"><span class="text-white p-3">Gallery</span></h3>
     </div>
 
-    </div> 
-    
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+                <img src="/images/man1.jpg" class="container-fluid p-0" data-bs-toggle="modal"
+                    data-bs-target="#myModal">
+            </div>
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+                <img src="/images/man2.jpg" class="container-fluid p-0" data-bs-toggle="modal"
+                    data-bs-target="#myModal">
+            </div>
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+                <img src="/images/man3.jpg" class="container-fluid p-0" data-bs-toggle="modal"
+                    data-bs-target="#myModal">
+            </div>
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+                <img src="/images/man4.jpg" class="container-fluid p-0" data-bs-toggle="modal"
+                    data-bs-target="#myModal">
+            </div>
+            <video class="vid col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery" data-bs-toggle="modal"
+                data-bs-target="#myModal" autoplay muted controls>
+                <source src="/images/vid1.mp4" type="video/mp4">
+                </source>
+            </video>
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+                <img src="/images/man5.jpg" class="container-fluid p-0" data-bs-toggle="modal"
+                    data-bs-target="#myModal">
+            </div>
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+                <img src="/images/man6.jpg" class="container-fluid p-0" data-bs-toggle="modal"
+                    data-bs-target="#myModal">
+            </div>
+            <div class="col-11   col-md-5 col-lg-3 border shadow curve  gallery">
+                <a href="/news" class="">
+                    <p class="text-center text-secondary mt-3">Click anywhere to land On news</p>
+                    <h1 class=" mb-0 p-3">Click to See Our News Cut Outs</h1>
+                </a>
+            </div>
+            <video class="vid col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery" data-bs-toggle="modal"
+                data-bs-target="#myModal" autoplay muted controls>
+                <source src="/images/vid2.mp4" type="video/mp4">
+                </source>
+            </video>
+        </div>
+    </div>
+
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-dialog-centered">
 
@@ -124,7 +107,7 @@
         $(document).ready(function () {
             $("img").click(function () {
                 var t = $(this).attr("src");
-                
+
                 $(".modal-body").html("<img src='" + t + "' class='modal-img'>");
                 $("#myModal").modal();
                 console.log("hhii")
@@ -144,3 +127,11 @@
 </body>
 
 </html>
+
+
+
+
+
+
+
+

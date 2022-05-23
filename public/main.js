@@ -7,14 +7,6 @@ let shopProducts = [
     price: 1200,
     image: "/images/img3.jpg",
     incart: 0,
-  },
-  {
-    productid: "m2",
-    name: "bambai MANGO",
-    hindiName: "मालदह आम",
-    price: 500,
-    image: "/images/img3.jpg",
-    incart: 0,
   }
 ];
 

@@ -28,6 +28,9 @@ let mailTransporter = nodemailer.createTransport({
 var UserData;
 var userDbId;
 
+const port = process.env.PORT || 3000;
+console.log("this is my port==>",port)
+
 exports.paytmPaynow = async (req, res) => {
   var data = req.body;
   console.log(data);
@@ -51,7 +54,7 @@ exports.paytmPaynow = async (req, res) => {
     mid: PaytmConfig.PaytmConfig.mid,
     websiteName: PaytmConfig.PaytmConfig.website,
     orderId: orderId,
-    callbackUrl: "http://localhost:3000/callback",
+    callbackUrl: `http://localhost:${port}/callback`,
     txnAmount: {
       value: tamount,
       currency: "INR",

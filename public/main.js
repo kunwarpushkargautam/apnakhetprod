@@ -86,16 +86,18 @@ function onLoadCartNumber() {
     for(let i =0;i<productsInCartList.length;i++){
       console.log("one product=>",productsInCartList[i])
       totreload = totreload + productsInCartList[i].incart*productsInCartList[i].price;
-    }
+    }}
     localStorage.setItem("totalCost",totreload);
     // document.getElementById("product_total_amt").innerText=
     console.log("sum Reloaded", typeof(totreload));
-  }
+  
 
   if (productNumbers) {
     for (let k = 0; k < cartnum.length; k++) {
       cartnum[k].textContent = productNumbers;
     }
+  }else{
+    localStorage.setItem("cartNumbers",0);
   }
 }
 

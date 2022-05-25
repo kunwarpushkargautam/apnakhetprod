@@ -219,14 +219,14 @@ exports.paytmCallback = async (req, res) => {
       });
     });
     console.log(strmsg)
-    twilioClient.messages 
-      .create({ 
-         body: strmsg+'with total payment of '+UserData.totalCost +' thank you!!. contact: wa.me/919262290959 Or mail us : business@apnakhet.org. Visit: http://www.apnakhet.in ', 
-         from: 'whatsapp:+14155238886',       
-         to: `whatsapp:+91${UserData.whatsapp}` 
-       }) 
-      .then(message => console.log("wasdasd9u==>",message.sid)) 
-      .done();
+    // twilioClient.messages 
+    //   .create({ 
+    //      body: strmsg+'with total payment of '+UserData.totalCost +' thank you!!. contact: wa.me/919262290959 Or mail us : business@apnakhet.org. Visit: http://www.apnakhet.in ', 
+    //      from: 'whatsapp:+14155238886',       
+    //      to: `whatsapp:+91${UserData.whatsapp}` 
+    //    }) 
+    //   .then(message => console.log("wasdasd9u==>",message.sid)) 
+    //   .done();
 
   var body = "";
 

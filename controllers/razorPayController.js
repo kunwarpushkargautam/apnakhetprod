@@ -8,10 +8,10 @@ let instance = new Razorpay({
   key_id: process.env.RAZOR_KEY_ID,
   key_secret: process.env.RAZOR_KEY_SECRET,
 });
-const twilio = require('twilio');
+const twilio = require("twilio");
 const twilioClient = twilio(
-       process.env.TWILIO_ACCOUNT_SID,
-       process.env.TWILIO_AUTH_TOKEN
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
 );
 var UserData;
 var userDbId;
@@ -20,7 +20,7 @@ var { receipt } = require("../src/billnumber");
 const nodemailer = require("nodemailer");
 
 let mailTransporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: "gmail",
   secure: true,
   auth: {
     user: process.env.EMAIL_USERNAME,
@@ -40,15 +40,15 @@ exports.razorPayOrder = async (req, res) => {
   let email = UserData.email;
   let fname = UserData.fullname;
   let products = UserData.productsInCart;
-  let productArrayMail=[];
-  for(let i =0;i<products.length;i++){
+  let productArrayMail = [];
+  for (let i = 0; i < products.length; i++) {
     let pObj = {};
     pObj.name = products[i].productName;
     pObj.cart = products[i].incart;
     pObj.cost = products[i].cost;
-    productArrayMail.push(pObj)
+    productArrayMail.push(pObj);
   }
-  console.log("products===>",productArrayMail)
+  console.log("products===>", productArrayMail);
   let receiptno = receipt()[0];
   console.log(receiptno);
   let order = await instance.orders.create({
@@ -65,22 +65,25 @@ exports.razorPayOrder = async (req, res) => {
     email,
     fname,
     productArrayMail,
-    key:instance.key_id
+    key: instance.key_id,
   });
 };
 
-exports.razorPayOrderResponse = async(req, res) => {
+exports.razorPayOrderResponse = async (req, res) => {
+  var payresponse;
+  let amount;
   let razorpay_payment_id = req.body.razorpay_payment_id;
+  let fail_payment_id = req.body.failpayid;
   let tosendEmail = req.body.email;
   let mailObj = req.body.mailitems;
   let amountPaid = req.body.amount;
   let phone = req.body.phone;
-  console.log(amountPaid)
-  let strmsg='Your Order of ';
-  for(let j=0;j<mailObj.length;j++){
-      strmsg = strmsg + mailObj[j].name + ' of Qty '+ mailObj[j].cart +', ';
+  console.log(razorpay_payment_id);
+  let strmsg = "Your Order of ";
+  for (let j = 0; j < mailObj.length; j++) {
+    strmsg = strmsg + mailObj[j].name + " of Qty " + mailObj[j].cart + ", ";
   }
-  strmsg = strmsg + 'have been received.'
+  strmsg = strmsg + "have been received.";
   console.log(strmsg);
   if (UserData === undefined) {
     res.render("error", {
@@ -90,24 +93,32 @@ exports.razorPayOrderResponse = async(req, res) => {
     });
   }
   if (razorpay_payment_id) {
-     
+    instance.payments
+      .fetch(razorpay_payment_id)
+      .then((response) => {
+        payresponse = response;
+        amount = payresponse.amount / 100;
+        console.log("pass response", response);
+      })
+      .catch((err) => console.log("this is error=>", err));
+
     var paytmPaymDetail = {
-      transDate: '',
+      transDate: "",
       txnId: razorpay_payment_id,
-      clienttxnId: '',
-      netAmount: '',
+      clienttxnId: "", 
+      netAmount: "",
       amountPaid: amountPaid,
-      status: '',
+      status: "",
       paymentGateway: "RazorPay",
-      mode: '',
+      mode: "",
     };
-  
+
     let updatePaymentInCart = await CustomerCart.findOneAndUpdate(
       { _id: userDbId },
       { paymentStatus: true, paymentByGateway: "RazorPay" },
       { returnOriginal: false }
     );
-  
+
     const customerAndpayment = new OrderPayment({
       userid: UserData._id,
       fullname: UserData.fullname,
@@ -126,19 +137,17 @@ exports.razorPayOrderResponse = async(req, res) => {
       customerKey: UserData.customerKey,
       paymentDetails: [paytmPaymDetail],
     });
-    let saveCustomerAndpayment = await customerAndpayment
-      .save()
-
+    let saveCustomerAndpayment = await customerAndpayment.save();
     let mailDetails = {
       from: "noreply.apnakhet@gmail.com",
       to: tosendEmail,
       subject: "Order Confirmation",
-      html:`<h5>Greetings from Apna Khet Bagan Foundtion</h5>
+      html: `<h5>Greetings from Apna Khet Bagan Foundtion</h5>
             <p>We have received payments with payment id : ${razorpay_payment_id} </p>
             <p>${strmsg}</p>
             <p>Total Amount recived ${amountPaid} via RazorPay </p>
             <p>We are heartly thankful to You for purchasing from us</p>
-      `
+      `,
     };
 
     mailTransporter.sendMail(mailDetails, function (err, data) {
@@ -148,16 +157,28 @@ exports.razorPayOrderResponse = async(req, res) => {
         console.log("Email sent successfully");
       }
     });
- 
-    twilioClient.messages 
-    .create({ 
-       body: strmsg+'with total payment of '+ amountPaid +' thank you!!. contact: wa.me/919262290959 Or mail us : business@apnakhet.org. Visit: http://www.apnakhet.in ', 
-       from: 'whatsapp:+14155238886',       
-       to: `whatsapp:+91${phone}` 
-     }) 
-    .then(message => console.log("wasdasd9u==>",message.sid)) 
-    .done();
 
+    // twilioClient.messages
+    //   .create({
+    //     body:
+    //       strmsg +
+    //       "with total payment of " +
+    //       amountPaid +
+    //       " thank you!!. contact: wa.me/919262290959 Or mail us : business@apnakhet.org. Visit: http://www.apnakhet.in ",
+    //     from: "whatsapp:+14155238886",
+    //     to: `whatsapp:+91${phone}`,
+    //   })
+    //   .then((message) => console.log("wasdasd9u==>", message.sid))
+    //   .done();
+  } else {
+    instance.payments
+      .fetch(fail_payment_id)
+      .then((response) => {
+        payresponse = response;
+        console.log("fail rsponse", response);
+      })
+      .catch((err) => console.log("this is fail error=>", err));
   }
-  res.send();
+
+  res.render("index")
 };

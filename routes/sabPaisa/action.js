@@ -4,7 +4,7 @@ const auth = require("./spauth");
 var url = require("url");
 const base64 = require("base-64");
 const utf8 = require("utf8");
-const open = require("open");
+const opn = require("open");
 const { v4: uuidv4 } = require("uuid");
 var querystring = require("querystring");
 const portfinder = require("portfinder");
@@ -82,46 +82,65 @@ exports.sabPaisa = async (req, res) => {
   var payerEmail = cemail;
   var channelId = "m";
 
-  spURL =
+  var forChecksumString = utf8.encode(
+    `Add` +
+      payerAddress +
+      `Email` +
+      payerEmail +
+      `amountTypechannelIdcontactNo` +
+      payerContact +
+      `failureURL` +
+      URLfailure +
+      `firstName` +
+      payerFirstName +
+      `grNumberlstName` +
+      payerLastName +
+      `midNameparam1param2param3param4pass` +
+      password +
+      `programIdru` +
+      URLsuccess +
+      `semstudentUintxnId` +
+      txnId +
+      `udf10udf11udf12udf13udf14udf15udf16udf17udf18udf19udf20udf5udf6udf7udf8udf9usern` +
+      username
+  );
+  while (forChecksumString.includes("â")) {
+    // replace + with â
+    forChecksumString = forChecksumString.replace("â", "");
+  }
+  var checksumString = auth.Auth._checksum(authKey, forChecksumString);
+  spURL = utf8.encode(
     `?clientName=` +
-    clientCode.trim() +
-    `​&prodCode=&usern=` +
-    username.trim() +
-    `​&pass=` +
-    password.trim() +
-    `&amt=​` +
-    tnxAmt +
-    `​&txnId=` +
-    txnId +
-    `​&firstName=` +
-    payerFirstName +
-    `​&lstName=` +
-    payerLastName +
-    `&contactNo=` +
-    payerContact +
-    `​&Email=` +
-    payerEmail +
-    `​&Add=` +
-    payerAddress.trim() +
-    `​&ru=` +
-    URLsuccess.trim() +
-    `​&failureURL=` +
-    URLfailure;
-
-  console.log("check for mandat", spURL);
-  //// spURL = '?clientName=SIPL1​&prodCode=&usern=nishant.jha_2885​&pass=SIPL1_SP2885&amt=​10​&txnId=315464687897​&firstName=Mukesh​&lstName=Kumar';
-
+      clientCode +
+      `​&prodCode=&usern=` +
+      username +
+      `​&pass=` +
+      password +
+      `&amt=​` +
+      tnxAmt +
+      `​&txnId=` +
+      txnId +
+      `​&firstName=` +
+      payerFirstName +
+      `​&lstName=` +
+      payerLastName +
+      `&contactNo=` +
+      payerContact +
+      `​&Email=` +
+      payerEmail +
+      `​&Add=` +
+      payerAddress +
+      `​&ru=` +
+      URLsuccess.trim() +
+      `​&failureURL=` +
+      URLfailure +
+      `&checkSum=` +
+      checksumString
+  );
   while (spURL.includes("â")) {
     // replace + with â
-    // console.log("come sppppp=============");
     spURL = spURL.replace("â", "");
   }
-
-  // spURL = "?clientName=SIPL1​&prodCode=";
-  var encryptParamUrl = auth.Auth._encrypt(authKey, authIV, spURL);
-  // console.log("encryptParamUrl = ",encryptParamUrl);
-  spURL = "?query=" + encryptParamUrl + "&clientName=" + clientCode;
-
   spURL = spDomain + spURL;
 
   while (spURL.includes("+")) {
@@ -129,171 +148,211 @@ exports.sabPaisa = async (req, res) => {
     spURL = spURL.replace("+", "%2B");
   }
 
-  console.log("final URL====", spURL);
-  res.json({ spURL });
+  //window.open(spURL);
+  console.log("this is url", spURL);
 
-  open(spURL);
+  // opens the url in the default browser
+  // opn(spURL.replace('/[^a-zA-Z0-9]/g', ""), {app: ['google chrome']});
+  opn(spURL.replace(//g, ""));
 };
 
-exports.utest = async (req, res) => {
-  let resUrl = req.url;
+exports.postSpRes = async (req, res) => {
+  // console.log("received from post",req.spCkey.keyId)
+  let resUrl = url.parse(req.url, true).query;
+  console.log("this is res url==>", resUrl);
   console.log("this is spCkey=>", spCkey);
-  const UserData = await CustomerCart.findOne({ customerKey: spCkey.keyId });
-  let email = UserData.email;
-  let userDbId = UserData._id.toString();
-  console.log("during paymentdata===>", UserData);
+  if (spCkey.keyId === undefined) {
+    res.render("error", {
+      statusCode: 404,
+      error: "Session Expired if money deducted twice, Confirm by enquiry",
+      desMsg: "Go to Home !!",
+    });
+  } else {
+    const UserData = await CustomerCart.findOne({ customerKey: spCkey.keyId });
+    let email = UserData.email;
+    let userDbId = UserData._id.toString();
+    spCkey.keyId = undefined;
+    // console.log("during paymentdata===>", UserData);
 
-  ////  console.log("this is return url===>",resUrl)
-  let resquery = req.query;
-  resquery = resquery.query;
-  ////  console.log("this is return query===>",resquery)
-  var authKey = process.env.SP_AUTHKEY;
-  var authIV = process.env.SP_AUTHIV;
-  var decrypturl = auth.Auth._decrypt(authKey, authIV, resquery);
-  console.log("this is decrypted url =====>", decrypturl);
-  const sabPaisaResparams = Object.fromEntries(new URLSearchParams(decrypturl));
-  console.log(sabPaisaResparams);
-  var sabPaisaPaymDetail = {
-    transDate: sabPaisaResparams.transDate,
-    txnId: sabPaisaResparams.SabPaisaTxId,
-    clienttxnId: sabPaisaResparams.clientTxnId,
-    netAmount: sabPaisaResparams.orgTxnAmount,
-    amountPaid: sabPaisaResparams.amount,
-    status: sabPaisaResparams.spRespStatus,
-    paymentGateway: "SabPaisa",
-    mode: sabPaisaResparams.payMode,
-  };
-  var spRespCode = sabPaisaResparams.spRespCode;
-  console.log("this is spRespCode =====>", spRespCode);
+    // ////  console.log("this is return url===>",resUrl)
 
-  let updatePaymentInCart = await CustomerCart.findOneAndUpdate(
-    { _id: userDbId },
-    { paymentStatus: true, paymentByGateway: sabPaisaResparams.payMode },
-    { returnOriginal: false }
-  );
+    // ////  console.log("this is return query===>",resquery)
 
-  const customerAndpayment = new OrderPayment({
-    userid: UserData._id,
-    fullname: UserData.fullname,
-    whatsapp: UserData.whatsapp,
-    email: UserData.email,
-    house: UserData.house,
-    street: UserData.street,
-    landmark: UserData.landmark,
-    pinCode: UserData.pinCode,
-    city: UserData.city,
-    state: UserData.state,
-    originalCost: UserData.originalCost,
-    totalCost: UserData.totalCost,
-    totalInCart: UserData.totalCart,
-    productsInCart: UserData.productsInCart,
-    customerKey: UserData.customerKey,
-    paymentDetails: [sabPaisaPaymDetail],
-  });
-  let saveCustomerAndpayment = await customerAndpayment
-    .save()
-    .then((result) => {
-      console.log("paytm data from result==>", result.productsInCart);
-      let strmsg = "Your Order of ";
-      for (let j = 0; j < result.productsInCart.length; j++) {
-        strmsg =
-          strmsg +
-          result.productsInCart[j].productName +
-          " of Qty " +
-          result.productsInCart[j].incart +
-          ", ";
-      }
-      strmsg = strmsg + "have been received.";
-      console.log(strmsg);
-      let mailDetails = {
-        to: email,
-        from: "noreply.apnakhet@gmail.com",
-        subject: "Order Confirmation",
-        html: `<h2>Greetings from Apna Khet Bagan Foundtion</h2>
+    var sabPaisaPaymDetail = {
+      transDate: resUrl.transDate,
+      txnId: resUrl.SabPaisaTxId,
+      clienttxnId: resUrl.clientTxnId,
+      netAmount: resUrl.orgTxnAmount,
+      amountPaid: resUrl.amount,
+      status: resUrl.spRespStatus,
+      paymentGateway: "SabPaisa",
+      mode: resUrl.payMode,
+    };
+    var spRespCode = resUrl.spRespCode;
+    console.log("this is spRespCode =====>", spRespCode, resUrl.transDate);
+
+    let updatePaymentInCart = await CustomerCart.findOneAndUpdate(
+      { _id: userDbId },
+      { paymentStatus: true, paymentByGateway: resUrl.payMode },
+      { returnOriginal: false }
+    );
+
+    const customerAndpayment = new OrderPayment({
+      userid: UserData._id,
+      fullname: UserData.fullname,
+      whatsapp: UserData.whatsapp,
+      email: UserData.email,
+      house: UserData.house,
+      street: UserData.street,
+      landmark: UserData.landmark,
+      pinCode: UserData.pinCode,
+      city: UserData.city,
+      state: UserData.state,
+      originalCost: UserData.originalCost,
+      totalCost: UserData.totalCost,
+      totalInCart: UserData.totalCart,
+      productsInCart: UserData.productsInCart,
+      customerKey: UserData.customerKey,
+      paymentDetails: [sabPaisaPaymDetail],
+    });
+    let saveCustomerAndpayment = await customerAndpayment
+      .save()
+      .then((result) => {
+        console.log("paytm data from result==>", result.productsInCart);
+        let strmsg = "Your Order of ";
+        for (let j = 0; j < result.productsInCart.length; j++) {
+          strmsg =
+            strmsg +
+            result.productsInCart[j].productName +
+            " of Qty " +
+            result.productsInCart[j].incart +
+            ", ";
+        }
+        strmsg = strmsg + `is ${sabPaisaPaymDetail.status}.${resUrl.reMsg}`;
+        console.log(strmsg);
+        let mailDetails = {
+          to: email,
+          from: "noreply.apnakhet@gmail.com",
+          subject: "Order Status",
+          html: `<h2>Greetings from Apna Khet Bagan Foundtion</h2>
+            <p>We have received payments with payment id : ${sabPaisaPaymDetail.txnId} </p>
+            <p>${strmsg}</p>
+            <p>Total Amount recived ${result.totalCost} via SabPaisa </p>
+            <p>We are heartly thankful to You for purchasing from us</p>
+      `,
+        };
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs");
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
+      });
+  }
+
+  //{ sabPaisaResparams }
+
+  res.render("sabPaisaPaymentStatus", { sabPaisaResparams: resUrl });
+
+  // res.render(req.url);
+};
+
+exports.spresponse = async (req, res) => {
+  let resUrl = url.parse(req.url, true).query;
+  console.log("this is res url==>", resUrl);
+
+  console.log("this is spCkey=>", spCkey);
+  if (spCkey.keyId === undefined) {
+    res.render("error", {
+      statusCode: 404,
+      error: "Session Expired if money deducted Confirm by enquiry",
+      desMsg: "Go to Home !!",
+    });
+  } else {
+    const UserData = await CustomerCart.findOne({ customerKey: spCkey.keyId });
+    let email = UserData.email;
+    let userDbId = UserData._id.toString();
+    spCkey.keyId = undefined;
+    // console.log("during paymentdata===>", UserData);
+
+    // ////  console.log("this is return url===>",resUrl)
+
+    // ////  console.log("this is return query===>",resquery)
+
+    var sabPaisaPaymDetail = {
+      transDate: resUrl.transDate,
+      txnId: resUrl.SabPaisaTxId,
+      clienttxnId: resUrl.clientTxnId,
+      netAmount: resUrl.orgTxnAmount,
+      amountPaid: resUrl.amount,
+      status: resUrl.spRespStatus,
+      paymentGateway: "SabPaisa",
+      mode: resUrl.payMode,
+    };
+    var spRespCode = resUrl.spRespCode;
+    console.log("this is spRespCode =====>", spRespCode, resUrl.transDate);
+
+    let updatePaymentInCart = await CustomerCart.findOneAndUpdate(
+      { _id: userDbId },
+      { paymentStatus: true, paymentByGateway: resUrl.payMode },
+      { returnOriginal: false }
+    );
+
+    const customerAndpayment = new OrderPayment({
+      userid: UserData._id,
+      fullname: UserData.fullname,
+      whatsapp: UserData.whatsapp,
+      email: UserData.email,
+      house: UserData.house,
+      street: UserData.street,
+      landmark: UserData.landmark,
+      pinCode: UserData.pinCode,
+      city: UserData.city,
+      state: UserData.state,
+      originalCost: UserData.originalCost,
+      totalCost: UserData.totalCost,
+      totalInCart: UserData.totalCart,
+      productsInCart: UserData.productsInCart,
+      customerKey: UserData.customerKey,
+      paymentDetails: [sabPaisaPaymDetail],
+    });
+    let saveCustomerAndpayment = await customerAndpayment
+      .save()
+      .then((result) => {
+        console.log("paytm data from result==>", result.productsInCart);
+        let strmsg = "Your Order of ";
+        for (let j = 0; j < result.productsInCart.length; j++) {
+          strmsg =
+            strmsg +
+            result.productsInCart[j].productName +
+            " of Qty " +
+            result.productsInCart[j].incart +
+            ", ";
+        }
+        strmsg = strmsg + `is ${sabPaisaPaymDetail.status}.${resUrl.reMsg}`;
+        console.log(strmsg);
+        let mailDetails = {
+          to: email,
+          from: "noreply.apnakhet@gmail.com",
+          subject: "Order Status",
+          html: `<h2>Greetings from Apna Khet Bagan Foundtion</h2>
           <p>We have received payments with payment id : ${sabPaisaPaymDetail.txnId} </p>
           <p>${strmsg}</p>
-          <p>Total Amount recived ${result.totalCost} via Paytm </p>
+          <p>Total Amount recived ${result.totalCost} via SabPaisa </p>
           <p>We are heartly thankful to You for purchasing from us</p>
     `,
-      };
-      mailTransporter.sendMail(mailDetails, function (err, data) {
-        if (err) {
-          console.log("Error Occurs");
-        } else {
-          console.log("Email sent successfully");
-        }
+        };
+        mailTransporter.sendMail(mailDetails, function (err, data) {
+          if (err) {
+            console.log("Error Occurs");
+          } else {
+            console.log("Email sent successfully");
+          }
+        });
       });
-    });
 
-  res.render("sabPaisaPaymentStatus", { sabPaisaResparams });
-
-  // res.render(req.url);
-};
-exports.sabPaisafailed = async (req, res) => {
-  let resUrl = req.url;
-  console.log("this is spCkey=>", spCkey);
-  const UserData = await CustomerCart.findOne({ customerKey: spCkey.keyId });
-  let userDbId = UserData._id.toString();
-  console.log("during paymentdata===>", UserData);
-
-  ////  console.log("this is return url===>",resUrl)
-  let resquery = req.query;
-  resquery = resquery.query;
-  ////  console.log("this is return query===>",resquery)
-  var authKey = process.env.SP_AUTHKEY;
-  var authIV = process.env.SP_AUTHIV;
-  var decrypturl = auth.Auth._decrypt(authKey, authIV, resquery);
-  console.log("this is decrypted url =====>", decrypturl);
-  const sabPaisaResparams = Object.fromEntries(new URLSearchParams(decrypturl));
-  console.log(sabPaisaResparams);
-  var sabPaisaPaymDetail = {
-    transDate: sabPaisaResparams.transDate,
-    txnId: sabPaisaResparams.SabPaisaTxId,
-    clienttxnId: sabPaisaResparams.clientTxnId,
-    netAmount: sabPaisaResparams.orgTxnAmount,
-    amountPaid: sabPaisaResparams.amount,
-    status: sabPaisaResparams.spRespStatus,
-    paymentGateway: "SabPaisa",
-    mode: sabPaisaResparams.payMode,
-  };
-  var spRespCode = sabPaisaResparams.spRespCode;
-  console.log("this is spRespCode =====>", spRespCode);
-
-  let updatePaymentInCart = await CustomerCart.findOneAndUpdate(
-    { _id: userDbId },
-    {
-      paymentCreated: true,
-      paymentStatus: sabPaisaResparams.spRespStatus,
-      paymentByGateway: sabPaisaResparams.payMode,
-    },
-    { returnOriginal: false }
-  );
-
-  const customerAndpayment = new OrderPayment({
-    userid: UserData._id,
-    fullname: UserData.fullname,
-    whatsapp: UserData.whatsapp,
-    email: UserData.email,
-    house: UserData.house,
-    street: UserData.street,
-    landmark: UserData.landmark,
-    pinCode: UserData.pinCode,
-    city: UserData.city,
-    state: UserData.state,
-    originalCost: UserData.originalCost,
-    totalCost: UserData.totalCost,
-    totalInCart: UserData.totalCart,
-    productsInCart: UserData.productsInCart,
-    customerKey: UserData.customerKey,
-    paymentDetails: [sabPaisaPaymDetail],
-  });
-  let saveCustomerAndpayment = await customerAndpayment.save();
-
-  res.render("sabPaisaPaymentStatus", { sabPaisaResparams });
-
-  // res.render(req.url);
-};
-
-exports.sabPaisaResponsePage = (req, res) => {
-  res.render("sabPaisaPaymentStatus");
+    //{ sabPaisaResparams }
+  }
+  res.render("sabPaisaPaymentStatus", { sabPaisaResparams: resUrl });
 };

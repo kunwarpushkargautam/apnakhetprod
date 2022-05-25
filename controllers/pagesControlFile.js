@@ -136,3 +136,6 @@ exports.gpayorder = (req, res) => {
 exports.newsAndArticles = (req, res) => {
   res.render("news");
 };
+exports.razorStatus = (req, res) => {
+  res.render("razorpayStatus");
+};

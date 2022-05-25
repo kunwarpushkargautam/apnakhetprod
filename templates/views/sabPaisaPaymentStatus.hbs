@@ -7,12 +7,15 @@
 
 <body>
     <!-- ==================Navigation Started================================== -->
-    {{>navbar}}
+    {{!-- {{>navbar}} --}}
     <!-- ==========================Navigatioin Ended================================ -->
     <!-- ==========================About Start================================ -->
     <div class="container row justify-content-center mx-auto">
         <div class="col-11 col-md-8 my-3">
             <h1 class="text-center">Transaction Details</span></h1>
+            <p class="text-center text-danger">Donot reload this page,Else You will loose the status Data</p>
+            <p class="text-center text-success">We have sent you mail  regarding this order,thanks</p>
+
             <table class="table table-sm table-striped border table-hover">
                 <thead>
                     <tr>
@@ -65,8 +68,9 @@
             </table>
 
         </div>
-        <div class="col-11 col-md-8 text-center"><a href="/" class="btn border ">Go Home</a></div>
-        
+        <div class="col-11 col-md-8 text-center"><a href="/" class="btn border ">Go Home</a>
+        </div>
+
 
 
 
@@ -77,9 +81,8 @@
 
 
 
-    {{>footer}}
+    {{!-- {{>footer}} --}}
     {{>cdnscript}}
-
 </body>
 
 </html>

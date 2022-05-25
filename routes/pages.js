@@ -30,7 +30,7 @@ const {
   newsAndArticles
 } = require("../controllers/pagesControlFile");
 
-const {sabPaisa,utest,sabPaisafailed,sabPaisaResponsePage} = require('./sabPaisa/action')
+const {sabPaisa,postSpRes,spresponse} = require('./sabPaisa/action')
 const {paytmPaynow,paytmCallback,paytmStatus} = require("../controllers/paytmController")
 const {razorPayOrder,razorPayOrderResponse} = require("../controllers/razorPayController")
 
@@ -54,13 +54,13 @@ router.get("/paytmcheckout",paytmcheckout);
 router.post("/callback",paytmCallback)
 router.get("/paytm-status",paytmStatus)
 router.post("/sabPaisa",sabPaisa);
-router.post("/response.js%0B",utest)
-router.post("/response.js",sabPaisafailed)
-router.get("/sabPaisaResponse",sabPaisaResponsePage);
+router.post("/response.js",postSpRes)
+router.get("/response.js",spresponse)
 router.get("/errorpage",errorpage);
 router.get("/privacy-policy",privacypolicy);
 router.get("/terms",termsandcondition);
-router.post("/gpayorder",gpayorder);
+router.post("/gpayorder",gpayorder); 
 router.get("/news",newsAndArticles)
 router.get("*",errorpage)
 module.exports = router;
+ 

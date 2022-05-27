@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/app.js -e js,hbs "
-
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +23,7 @@
     "nodemailer-sendgrid-transport": "^0.2.0",
     "nodemon": "^2.0.15",
     "open": "^8.4.0",
+    "openurl": "^1.1.1",
     "paytmchecksum": "^1.5.0",
     "portfinder": "^1.0.28",
     "punycode": "^2.1.1",

@@ -28,9 +28,9 @@ const failure = `http://127.0.0.1:3000/response.js`;
 var spCkey;
 
 exports.sabPaisa = async (req, res) => {
-  const fport = portfinder.getPort((err, freeport) => {
-    return freeport;
-  });
+  // const fport = portfinder.getPort((err, freeport) => {
+  //   return freeport;
+  // });
   spCkey = req.body;
   console.log("this is sabPaisa data", spCkey.keyId);
   const UserData = await CustomerCart.findOne({ customerKey: spCkey.keyId });
@@ -153,7 +153,11 @@ exports.sabPaisa = async (req, res) => {
 
   // opens the url in the default browser
   // opn(spURL.replace('/[^a-zA-Z0-9]/g', ""), {app: ['google chrome']});
-  opn(spURL.replace(//g, ""));
+  spURL = spURL.replace(//g, "");
+  console.log("sending this url=>",spURL);
+  res.json({url:spURL})
+  // opn(spURL.replace(//g, ""));
+  
 };
 
 exports.postSpRes = async (req, res) => {

@@ -200,8 +200,10 @@
                 body: JSON.stringify({ keyId })
             });
             let resSabPaisa = await sabPaisaResponse.json();
-            let furl = resSabPaisa.spURl;
-            console.log(resSabPaisa);
+            console.log("this shoulf be url oobj",resSabPaisa);
+            let furl = resSabPaisa.url;
+            console.log("this shoulf be url",furl);
+            window.open(resSabPaisa.url);
         }
     </script>
     <script>

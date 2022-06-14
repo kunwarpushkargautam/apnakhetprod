@@ -1,4 +1,6 @@
 twilio failsafe: Y4Z02UpgPe85VO1YMcfXsL-4ltHGVRJ4spd6nyFH
+EMAIL_USERNAME= noreply.apnakhet@gmail.com
+EMAIL_PASSWORD= cdpmektogurbojoe
 ===============================================================================================
 SP_USERNAME = Ish988@sp
 SP_PASS = wF2F0io7gdNj
@@ -13,6 +15,133 @@ PAYTM_MID = fiudkI52824526146010
 PAYTM_KEY= zHPdmBE%pYeY%Phd
 PAYTM_WEBSITE = DEFAULT
 ====================================================================================================
+SP_USERNAME = sdfggdsg_1210
+SP_PASS = ABN_SP1210
+SP_CLENT = ABN01
+SP_PGMID = 5666
+SP_AUTHKEY = wRAKcWb8WjGSU8Z2
+SP_AUTHIV = 9oalkb7SCYunVDYg
+
+
+SP_USERNAME = bhabesh.jha_4406
+SP_PASS = APKBF_SP4406
+SP_CLENT = APKBF
+#SP_PGMID = 5666
+SP_AUTHKEY = o8UgmCLh25iQUZTk
+SP_AUTHIV = AQnohofsAuwF954K
+==============================================================================================================
+// let shopProducts = [
+//   {
+//     productid: "m1",
+//     name: "MALDHA MANGO",
+//     hindiName: "मालदह आम",
+//     price: 1200,
+//     image: "/images/mal.jpg",
+//     incart: 0,
+//     info: "One box contains 12 pieces green (ready to ripen) premium quality Maldha mango. We are not using any chemical/gas for ripening it. Mango naturally ripen in your home. PLEASE NOTE - We are not using any type of chemical/gas after harvest, so sometimes black spots my be appears on the skin of fruit. This is the beauty of natural products, we have to bear this",
+//   },
+  
+// ];
+
+ let DemandFruitProducts = [
+    {
+      productid: "d5",
+      name: "BAMBAI MANGO ",
+      hindiName:"( बम्बई )",
+      //price: 800,
+      priceInfo: "whatsapp for best price",
+      image: "/images/bam.jpg",
+      info: "One box contains 4 Kg green (ready to ripen) premium quality Bambai mango. We are not using any chemical/gas for ripening it. Mango naturally ripen in your home. PLEASE NOTE - We are not using any type of chemical/gas after harvest, so sometimes black spots my be appears on the skin of fruit. This is the beauty of natural products, we have to bear this",
+      incart: 0,
+      pinfo: "",
+      stockStatus:"Out of Stock"
+    },
+    {
+      productid: "d6",
+      name: "ZARDA/ZARDALU ",
+      hindiName:"(जर्दा/जर्दालू)",
+      //price: 1000,
+      priceInfo: "whatsapp for best price",
+      image: "/images/jard.jpg",
+      info: "One box contains 4 Kg green (ready to ripen) premium quality Zarda mango. We are not using any chemical/gas for ripening it. Mango naturally ripen in your home. PLEASE NOTE - We are not using any type of chemical/gas after harvest, so sometimes black spots my be appears on the skin of fruit. This is the beauty of natural products, we have to bear this",
+      incart: 0,
+      pinfo: " ",
+      stockStatus:"Out of Stock"
+    },
+    {
+      productid: "d7",
+      name: "SHUKUL",
+      hindiName:"(शुकुल)",
+      //price: 1300,
+      priceInfo: "whatsapp for best price",
+      image: "/images/sukul.jpeg",
+      info: "One box contains 4 Kg green (ready to ripen) premium quality Sukul mango. We are not using any chemical/gas for ripening it. Mango naturally ripen in your home. PLEASE NOTE - We are not using any type of chemical/gas after harvest, so sometimes black spots my be appears on the skin of fruit. This is the beauty of natural products, we have to bear this",
+      incart: 0,
+      pinfo: " ",
+      stockStatus:""
+    }
+  ];
+
+
+ let DemandProducts = [
+    
+    {
+      productid: "d1",
+      name: "Roasted Flaxseed/Linseed Powder ",
+      hindiName:"(तिसी)",
+      //price: 800,
+      priceInfo: "whatsapp for best price",
+      image: "/images/tisi.jpeg",
+      info: `Roasted Flaxseed/Linseed (तिसी) Powder (Handmade) Rural women roast Flaxseed/ Linseed on slow wooden flame.After roasting, they grind it by hand and make a fine powder of it.It can also be made mildly spicy upon your order.We send it to you, without salt.You can add salt as per your test and enjoy the indigenous food product.
+            PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free `,
+      incart: 0,
+      pinfo: "लकड़ी के चूल्हे पर रोस्टेड एवं हाथ से कुटा हुआ तीसी  का पाउडर",
+    },
+    {
+      productid: "d2",
+      name: "Wheat Flour",
+      hindiName:"(गेहूं आटा)",
+      //price: 700,
+      priceInfo: "whatsapp for best price",
+      image: "/images/wheat.jpg",
+      info: ` Wheat Flour ( Hand Grinded) 
+Clean wheat is thoroughly washed and dried, then after grinding it in a hand mill by rural women and its flour is prepared. 
+Because, it is grind in a hand stone grinder, due to this the nutritious substances present inside it do not burn as compared to the machine grinder.
+These indigenous products are not only suitable for your health, but also strengthen the financial health of rural women.  Every single piece of bread you eat can become a source of employment for rural women.PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free`,
+      incart: 0,
+      pinfo: "हाथ से पीसा हुआ गेहूं का आटा ",
+    },
+    {
+      productid: "d3",
+      name: "Black Wheat Flour",
+      hindiName:"(काला गेहूं आटा)",
+      //price: 1000,
+      priceInfo: "whatsapp for best price",
+      image: "/images/blackwheat.jpeg",
+      info: `Some researchers claim  - Black Wheat has many health benefits and has many important nutrients and eating it also increases the body's immunity. Black wheat contains antioxidants, B vitamins, folic acid, selenium, magnesium, manganese, zinc, calcium, iron, copper, potassium, fibre and amino acids, which make this wheat rich in nutrients.
+Clean black wheat is thoroughly washed and dried, then after grinding it in a hand mill by rural women and its flour is prepared. 
+Because, it is grind in a hand stone grinder, due to this the nutritious substances present inside it do not burn as compared to the machine grinder.
+These indigenous products are not only suitable for your health, but also strengthen the financial health of rural women.  Every single piece of bread you eat can become a source of employment for rural women.PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free`,
+      incart: 0,
+      pinfo: " हाथ से पीसा हुआ काला गेहूं का आटा",
+    },
+    {
+      productid: "d4",
+      name: "Ragi/Finger Millet Flour",
+      hindiName:"(मडुवा आटा)",
+      //price: 500,
+      priceInfo: "whatsapp for best price",
+      image: "/images/marua.jpeg",
+      info: `Some researchers claim -
+Ragi/Finger Millet is rich in fibre minerals and amino acids which make it a good choice for diabetics. It also has more polyphenols than the commonly used grains like rice, wheat, and corn which help control blood sugar levels.
+Ragi/Finger Millet
+Clean Ragi/Finger Millet is thoroughly washed and dried, then after grinding it in a hand mill by rural women and its flour is prepared. 
+Because, it is grind in a hand stone grinder, due to this the nutritious substances present inside it do not burn as compared to the machine grinder.
+These indigenous products are not only suitable for your health, but also strengthen the financial health of rural women.  Every single piece of bread you eat can become a source of employment for rural women.PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free`,
+      incart: 0,
+      pinfo: " हाथ से पीसा हुआ मडुवा का आटा ",
+    },
+  ];
 =====================================================================================================
 // "use strict";
 

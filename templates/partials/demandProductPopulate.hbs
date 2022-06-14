@@ -1,95 +1,9 @@
 <script>
-  let DemandProducts = [
-    {
-      productid: "d5",
-      name: "BAMBAI MANGO ( बम्बई )",
-      //price: 800,
-      priceInfo: "whatsapp for best price",
-      image: "/images/img3.jpg",
-      info: "",
-      incart: 0,
-      pinfo:" ",
-    },
-    {
-      productid: "d6",
-      name: "ZARDA/ZARDALU (जर्दा/जर्दालू)",
-      //price: 1000,
-      priceInfo: "whatsapp for best price",
-      image: "/images/img3.jpg",
-      info: "",
-      incart: 0,
-      pinfo:" ",
-    },
-    {
-      productid: "d7",
-      name: "SHUKUL (शुकुल)",
-      hindiName: "शुकुल",
-      //price: 1300,
-      priceInfo: "whatsapp for best price",
-      image: "/images/img3.jpg", info: "",
-      incart: 0,
-      pinfo:" ",
-    },
-    {
-      productid: "d1",
-      name: "Roasted Flaxseed/Linseed Powder (तिसी)",
-      //price: 800,
-      priceInfo: "whatsapp for best price",
-      image: "/images/flexiseed.jpg",
-      info: `Roasted Flaxseed/Linseed (तिसी) Powder (Handmade) Rural women roast Flaxseed/ Linseed on slow wooden flame.After roasting, they grind it by hand and make a fine powder of it.It can also be made mildly spicy upon your order.We send it to you, without salt.You can add salt as per your test and enjoy the indigenous food product.
-            PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free `,
-      incart: 0,
-      pinfo: "लकड़ी के चूल्हे पर रोस्टेड एवं हाथ से कुटा हुआ तीसी  का पाउडर",
-    },
-    {
-      productid: "d2",
-      name: "Wheat Flour",
-      //price: 700,
-      priceInfo: "whatsapp for best price",
-      image: "/images/wheat.jpg",
-      info: ` Wheat Flour ( Hand Grinded) 
-Clean wheat is thoroughly washed and dried, then after grinding it in a hand mill by rural women and its flour is prepared. 
-Because, it is grind in a hand stone grinder, due to this the nutritious substances present inside it do not burn as compared to the machine grinder.
-These indigenous products are not only suitable for your health, but also strengthen the financial health of rural women.  Every single piece of bread you eat can become a source of employment for rural women.PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free`,
-      incart: 0,
-      pinfo: "हाथ से पीसा हुआ गेहूं का आटा ",
-    },
-    {
-      productid: "d3",
-      name: "Black Wheat Flour",
-      //price: 1000,
-      priceInfo: "whatsapp for best price",
-      image: "/images/blackflour.jpg",
-      info: `Some researchers claim  - Black Wheat has many health benefits and has many important nutrients and eating it also increases the body's immunity. Black wheat contains antioxidants, B vitamins, folic acid, selenium, magnesium, manganese, zinc, calcium, iron, copper, potassium, fibre and amino acids, which make this wheat rich in nutrients.
-Clean black wheat is thoroughly washed and dried, then after grinding it in a hand mill by rural women and its flour is prepared. 
-Because, it is grind in a hand stone grinder, due to this the nutritious substances present inside it do not burn as compared to the machine grinder.
-These indigenous products are not only suitable for your health, but also strengthen the financial health of rural women.  Every single piece of bread you eat can become a source of employment for rural women.PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free`,
-      incart: 0,
-      pinfo: " हाथ से पीसा हुआ काला गेहूं का आटा",
-    },
-    {
-      productid: "d4",
-      name: "Ragi/Finger Millet Flour",
-      //price: 500,
-      priceInfo: "whatsapp for best price",
-      image: "/images/ragi.jpg",
-      info: `Some researchers claim -
-Ragi/Finger Millet is rich in fibre minerals and amino acids which make it a good choice for diabetics. It also has more polyphenols than the commonly used grains like rice, wheat, and corn which help control blood sugar levels.
-Ragi/Finger Millet
-Clean Ragi/Finger Millet is thoroughly washed and dried, then after grinding it in a hand mill by rural women and its flour is prepared. 
-Because, it is grind in a hand stone grinder, due to this the nutritious substances present inside it do not burn as compared to the machine grinder.
-These indigenous products are not only suitable for your health, but also strengthen the financial health of rural women.  Every single piece of bread you eat can become a source of employment for rural women.PLEASE NOTE - WE ARE NOT USING ANY PRESERVATIVES FOR ENHANCING THE SHELF LIFE OF THESE PRODUCTS.All Products are chemical residue free`,
-      incart: 0,
-      pinfo: " हाथ से पीसा हुआ मडुवा का आटा ",
-    },
-  ];
-
-
-
-  let populateDemandCard = () => {
+ 
+  let populateDemandCard = (DemandProducts) => {
     let demandCardList = document.getElementById("cardlistDemand");
     const productCardHtml = DemandProducts.map((product, i) => {
-      return `<div class="nodecoration col-lg-3  col-md-4 col-sm-6 col-11  p-2">
+      return `<div class="nodecoration col-lg-3 col-xl-2 col-md-4 col-sm-6 col-11  p-2 wow animate__animated animate__zoomIn">
         <a href="" target="_blank">
             <div class="card border-0 shadow py-3 ">
                 <div class="card-img pt-2 mx-auto zoomonhover  ">
@@ -97,9 +11,10 @@ These indigenous products are not only suitable for your health, but also streng
                 </div>
                 <div class="card-body mx-auto text-center py-0">
                     <h5 class=" my-1 text-secondary">${product.name}</h5>
-                    <a href="" class="infotag" data-bs-toggle="tooltip" data-bs-html="true"  title="${product.info}"><i class="fa-solid fa-circle-info  "></i><span
+                    <p class=" my-1 text-secondary">${product.hindiName}</p>
+                    <a href="" class="infotag" data-bs-toggle="modal" data-bs-target="#exampleModaldemandProduct${i}"  title=""><i class="fa-solid fa-circle-info  "></i><span
                             class="px-1">info</span></a>
-                    <p class="text-muted my-0 ">Fresh and Natural handmade products. All are chemical residue free. ${product.pinfo}</p>
+                    <p class="text-muted my-0 ">Fresh and Natural handmade products. All are chemical residue free.<br> ${product.pinfo}</p>
                     <a href="https://wa.me/+919262290959/?text=Hello%20there.%20I%20need%20information%20about%20'${product.name}'." target="_blank"><p class="text-bold"><i class="fa-solid fa-circle-info"></i><span
                             class="px-1">${product.priceInfo}</span></p></a>
 
@@ -107,6 +22,23 @@ These indigenous products are not only suitable for your health, but also streng
                 <a href="https://wa.me/+919262290959/?text=Hello%20there.%20I%20want%20to%20demand%20this%20product.%20So%20I%20need%20information%20about%20'${product.name}'." target="_blank" class=" text-center   btncustom1 mx-3 "><i class="fa-solid fa-cart-plus"></i> Demand</a>
             </div>
         </a>
+    </div>
+        <div class="modal fade" id="exampleModaldemandProduct${i}" tabindex="-1" aria-labelledby="exampleModalLabeldemandProduct${i}" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title text-success" id="exampleModalLabeldemandProduct${i}">${product.name}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>${product.info}
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">ok</button>
+                </div>
+            </div>
+        </div>
     </div>`;
     });
 

@@ -95,7 +95,11 @@ const CustomerAndPayments = new mongoose.Schema(
       type: String,
       required: true,
     },
-
+    paymentStatus:{
+      type:String,
+      required:true,
+      default:"NA"
+    },
     paymentDetails: [paymentDetails],
   },
   { timestamps: true }

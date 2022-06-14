@@ -6,15 +6,16 @@ function receipt() {
   var day = String(today.getDate()).padStart(2, "0");
   var month = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
   var year = today.getFullYear();
-  var date = year + month + day;
+  var getTime = today.getTime();
+  var date = year + month + day+getTime;
 
-  if (date === flagdate) {
-    billnumber = "Apn" + date + counter;
+  if (date === flagdate) { 
+    billnumber = "Apn" + date ;
     counter += 1;
   } else if (date > flagdate) {
     flagdate = date;
     counter = 1;
-    billnumber = "Apn" + date + counter;
+    billnumber = "Apn" + date ;
   } else {
     billnumber = "receipt failed";
   }

@@ -7,6 +7,11 @@ const helpSchema = new mongoose.Schema(
       type: Schema.Types.ObjectId,
       ref: "RegisteredOfficer",
     },
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     email: {
       type: String,
       required: true,

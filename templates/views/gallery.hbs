@@ -12,13 +12,14 @@
             color: black;
             padding: 1%;
         }
-       
+
         .gallery {
-            
+
             max-height: 12rem;
             overflow: hidden;
         }
-        .gallery img{
+
+        .gallery img {
             background-size: cover;
             background-position: center;
         }
@@ -33,6 +34,8 @@
             padding: 0px;
 
         }
+
+        
     </style>
 
 <body>
@@ -44,46 +47,62 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+            <div
+                class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn  ">
                 <img src="/images/man1.jpg" class="container-fluid p-0" data-bs-toggle="modal"
                     data-bs-target="#myModal">
             </div>
-            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+            <div
+                class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn  ">
                 <img src="/images/man2.jpg" class="container-fluid p-0" data-bs-toggle="modal"
                     data-bs-target="#myModal">
             </div>
-            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
-                <img src="/images/man3.jpg" class="container-fluid p-0" data-bs-toggle="modal"
+
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn ">
+                <img src="/images/man4-min.jpg" class="container-fluid p-0" data-bs-toggle="modal"
                     data-bs-target="#myModal">
             </div>
-            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
-                <img src="/images/man4.jpg" class="container-fluid p-0" data-bs-toggle="modal"
-                    data-bs-target="#myModal">
-            </div>
-            <video class="vid col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery" data-bs-toggle="modal"
-                data-bs-target="#myModal" autoplay muted controls>
-                <source src="/images/vid1.mp4" type="video/mp4">
-                </source>
-            </video>
-            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+
+            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn ">
                 <img src="/images/man5.jpg" class="container-fluid p-0" data-bs-toggle="modal"
                     data-bs-target="#myModal">
             </div>
-            <div class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery">
+            <div
+                class="col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn  ">
                 <img src="/images/man6.jpg" class="container-fluid p-0" data-bs-toggle="modal"
                     data-bs-target="#myModal">
             </div>
-            <div class="col-11   col-md-5 col-lg-3 border shadow curve  gallery">
+            <div
+                class="col-11   col-md-5 col-lg-3 border shadow curve  gallery wow animate__animated animate__zoomIn  ">
                 <a href="/news" class="">
                     <p class="text-center text-secondary mt-3">Click anywhere to land On news</p>
                     <h1 class=" mb-0 p-3">Click to See Our News Cut Outs</h1>
                 </a>
             </div>
-            <video class="vid col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery" data-bs-toggle="modal"
-                data-bs-target="#myModal" autoplay muted controls>
+            <video
+                class="vid col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn  "
+                data-bs-toggle="modal" data-bs-target="#myModal" autoplay muted controls>
                 <source src="/images/vid2.mp4" type="video/mp4">
                 </source>
             </video>
+            <video
+                class="vid col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn "
+                data-bs-toggle="modal" data-bs-target="#myModal" autoplay muted controls>
+                <source src="/images/vid1.mp4" type="video/mp4">
+                </source>
+            </video>
+            <video
+                class="vid col-11   col-md-5 col-lg-3 shadow curve m-2 p-0 gallery wow animate__animated animate__zoomIn "
+                data-bs-toggle="modal" data-bs-target="#myModal" autoplay muted controls>
+                <source src="/images/vid3.mp4" type="video/mp4">
+                </source>
+            </video>
+            <h5 class="text-success">Black wheat flour Manufacturing:</h5>
+            <iframe src="https://drive.google.com/file/d/1xxe2TRKelblRzrWZTaYazOa1lL6Y44bd/preview" width="640"
+                height="480" allow="autoplay" allowfullscreen="allowfullscreen"></iframe>
+
+
+
         </div>
     </div>
 
@@ -104,19 +123,20 @@
         integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
+        
         $(document).ready(function () {
             $("img").click(function () {
                 var t = $(this).attr("src");
-
+                console.log(t)
                 $(".modal-body").html("<img src='" + t + "' class='modal-img'>");
                 $("#myModal").modal();
                 console.log("hhii")
             });
 
             $("video").click(function () {
-                var v = $("video > source");
+                var v = $(this).children('source');
                 var t = v.attr("src");
-                console.log(t)
+                console.log("src->", t)
                 $(".modal-body").html("<video class='model-vid' autoplay muted controls><source src='" + t + "' type='video/mp4'></video>");
                 $("#myModal").modal();
             });
@@ -127,11 +147,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-

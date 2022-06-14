@@ -65,8 +65,12 @@
                             <h3 class="h2">
                                 {{error}}
                             </h3>
-
+                            {{#if mainmsg}}
+                            <p>{{mainmsg}}</p>
+                            {{else}}
                             <p>the page you are looking for not avaible!</p>
+                            {{/if}}
+                            
                             <p>{{desMsg}}</p>
 
                             <a href="/index" class="link_404">Go to Home</a>

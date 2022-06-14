@@ -15,6 +15,10 @@
   border:none !important;
 }
 
+.searchbox input{
+  outline: none;
+  font-size: 1.2rem;
+}
 .btnshadow{
    box-shadow: 0px 1px 3px grey;
 }
@@ -39,22 +43,6 @@
   }
 }
 
-
-
-
-.parallax {
-  /* The image used */
-  background-image: url("../images/a2.jpg");
-  width: 100%;
-  /* Set a specific height */
-  /* min-height: 100px; */
-  /* filter: brightness(90%); */
-  /* Create the parallax scrolling effect */
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
 .zoomonhover {
   overflow: hidden;
@@ -223,6 +211,15 @@ li input {
   100% {
     transform: translateX(6px);
   }
+}
+
+.borderless{
+  border: none;
+  background: rgb(219, 219, 219);
+}
+.borderless:hover{
+  color: white;
+  background: #198754;
 }
 
 button .navbar-toggler {
@@ -656,7 +653,7 @@ a {
   border-radius: 5px;
   transition: 0.5s;
   box-shadow: 0px 0px 20px rgb(128, 128, 128, 0.6);
-  background-color: rgb(255, 255, 255);
+  background-color: rgba(190, 234, 255, 0.5);
 }
 
 .whatsappTool a {

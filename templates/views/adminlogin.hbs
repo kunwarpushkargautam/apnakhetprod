@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    {{>head}}
+
+<body>
+
+    <div class=" mx-auto mt-5">
+        <div class="row mx-auto text-center  justify-content-center my-3">
+            <div class="col-11 col-md-7 ">
+                <h4 class="text-secondary ">Welcome At</h4>
+                <h1 class="text-success ">Apna Khet Admin</h1>
+            </div>
+        </div>
+        <form action="/verifyadmin" method="POST">
+            <div class="row justify-content-center mx-auto">
+                <div class="col-11 col-md-6 col-lg-5 col-xl-4  curve shadow py-4">
+                    <div class="row    justify-content-center py-1">
+                        <div class="col-10 col-md-3 px-0 d-flex align-items-center">
+                            <p class="mb-0">UserId :</p>
+                        </div>
+                        <div class="col-11 col-md-6 px-0">
+                            <input type="text" class="w-100 curve p-1 border border-secondary"
+                                placeholder="Your Admin Id" name="adminId" required>
+                        </div>
+                    </div>
+                    <div class="row py-1  justify-content-center ">
+                        <div class="col-11 col-md-3 px-0 d-flex align-items-center">
+                            <p class="mb-0">Password :</p>
+                        </div>
+                        <div class="col-11 col-md-6 px-0">
+                            <input type="password" class="w-100 curve p-1 border border-secondary"
+                                placeholder="Your Admin password" name="adminPass" required>
+                        </div>
+                    </div>
+                    <div class="row mx-auto text-center justify-content-center mt-3 ">
+                        <div class="col-8 col-md-6 col-lg-5 ">
+                            <button id="submit" class="btncustom4 py-0 px-2 text-white w-100"
+                                type="submit">Login</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+
+</body>
+
+</html>

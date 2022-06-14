@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+{{>head}}
+
+<body>
+    <div class="container">
+
+        <h1 class="text-center my-2 bg-warning py-2 text-white">Payment Dashboard</h1>
+        <div class="row justify-content-center mx-auto">
+                        <div class="col-5 text-center px-0 mx-1">
+                <a href="/admindashboard"><button class="borderless curve py-1 px-3"><i class="fa-solid fa-house "></i> Dashboard</button></a>
+            </div>
+            <div class="col-5 text-center px-0 mx-1">
+                <form action="/adminlogout" method="post">
+                    <button class="borderless curve py-1 px-3"> <i class="fas fa-sign-out-alt"></i>  Logout</button>
+                </form>
+            </div>
+        </div>
+        <div class="container mt-3 mx-auto px-0 px-md-2 row">
+            <div class="col-lg-9 col-12 mx-auto  px-0">
+                <form action="/adminorderoneday" method="post">
+                    <div class="row searchbox  py-2 m-auto w-100 shadow rounded-3 ">
+                        {{#if searchvalue}}
+                        <input class=" col-7 col-lg-9 border-0 " id="searchinput" type="text"
+                            placeholder="{{searchvalue}}" name="search" >
+                            {{else}}
+                        <input class=" col-7 col-lg-9 border-0 " id="searchinput" type="text"
+                            placeholder="Search here.." name="search" >
+                        {{/if}}
+                        <input class=" col-3 col-lg-2 border " id="searchdayinput" type="text"
+                            placeholder="day" name="day" value="{{day}}">
+                        <button class="text-center col-2 border-0 bg-white col-lg-1" id="searchbtn"><img class=""
+                                src="/images/search.png" type="submit" width="27px" alt=""></button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-11 mx-auto px-0">
+                <div class="accordion accordion-flush" id="accordionExample">
+                    {{#each data as |data index|}}
+                    <div class="accordion-item my-2 shadow ">
+                        <h2 class="accordion-header" id="heading{{index}}">
+                            <button class="accordion-button " type="button" data-bs-toggle="collapse"
+                                data-bs-target="#collapse{{index}}" aria-expanded="true"
+                                aria-controls="collapse{{index}}">
+                                <p class="mb-0"><span class="text-dark h5">{{data.fullname}}</span><br><span
+                                        class="text-secondary text-break">({{data.email}})</span><br><span
+                                        class="text-success">{{data.whatsapp}}</span> | <span class="text-dark">Status :
+                                    </span>{{data.paymentStatus}}<br><span
+                                        class="text-secondary">{{data.createdAt}}</span>
+                                </p>
+                            </button>
+                        </h2>
+                        <div id="collapse{{index}}" class="accordion-collapse collapse show"
+                            aria-labelledby="heading{{index}}" data-bs-parent="#accordionExample">
+                            <div class="accordion-body px-0">
+                                <div class="row mx-auto justify-content-center w-100">
+                                    <div class="col-12 col-md-5">
+                                        <p class="mb-0 text-success"><strong>Products:</strong></p>
+                                        {{#each data.productsInCart as |product ind|}}
+                                        <p class="mb-0">[ {{product.productName}} | Qty: {{product.incart}} |
+                                            CPQ:{{product.cost}} ]</p>
+                                        {{/each}}
+
+                                    </div>
+                                    <div class="col-12 col-md-5 mt-1">
+                                        <p class="mb-0 text-secondary"><strong>Original Cost :</strong>
+                                            {{data.originalCost}}</p>
+                                        <p class="mb-0 text-success"><strong>Paid Amount :</strong> {{data.totalCost}}
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-md-5">
+                                        <p class="mb-0 "><strong>Address:</strong>
+                                        <p class="mb-0 text-secondary"><strong>House:</strong> {{data.house}}</p>
+                                        <p class="mb-0 text-secondary"><strong>Street:</strong> {{data.street}}</p>
+                                        <p class="mb-0 text-secondary"><strong>LandMark:</strong> {{data.landmark}}</p>
+                                        <p class="mb-0 text-secondary"><strong>City:</strong> {{data.city}}</p>
+                                        <p class="mb-0 text-secondary"><strong>State:</strong> {{data.state}}</p>
+                                        <p class="mb-0 text-secondary"><strong>Pincode:</strong> {{data.pinCode}}</p>
+                                        </p>
+                                    </div>
+                                    <div class="col-12 col-md-5">
+                                        <p class="mb-0 "><strong>Payment Details:</strong></p>
+                                        {{#each data.paymentDetails as |payment ind|}}
+                                        <p class="mb-0 text-secondary"><strong>Date:</strong> {{payment.transDate}}</p>
+                                        <p class="mb-0 text-secondary text-break"><strong>TxnId:</strong> {{payment.txnId}}</p>
+                                        <p class="mb-0 text-secondary"><strong>amt:</strong> {{payment.amountPaid}}</p>
+                                        <p class="mb-0 text-secondary"><strong>mode:</strong> {{payment.mode}}</p>
+                                        <p class="mb-0 text-secondary"><strong>Gateway:</strong>
+                                            {{payment.paymentGateway}}</p>
+                                        <p class="mb-0 text-secondary"><strong>Status:</strong> {{payment.status}}</p>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{>cdnscript}}
+    {{>cartjs}}
+
+
+</body>
+
+</html>

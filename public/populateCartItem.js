@@ -99,7 +99,7 @@ let populateCartItem = (productsInCartList) => {
     document.getElementById(
       "main_cart_container"
     ).innerHTML = `<p class="h3 text-center text-secondary py-3"> OOps!! Cart Seems Empty..</p>
-    <img src="/images/empty-box.png" class="container-fluid py-3 ">`;
+    <img src="/images/empty-box-min.png" class="container-fluid py-3 ">`;
   }
 };
 

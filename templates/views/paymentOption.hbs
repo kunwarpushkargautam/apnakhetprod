@@ -19,27 +19,29 @@
                 <div class="align-items-center mx-auto d-flex flex-column">
 
 
-                    <a href="" class="mx-auto swbtn my-2 border btnshadow curve  text-secondary" >
-                        <div class="d-flex  my-2 align-items-center" id="actSabPaisa">{{!-- actSabPaisa- data-bs-toggle="modal"
-                        data-bs-target="#exampleModal2" --}}
+                    <a href="" class="mx-auto swbtn my-2 border btnshadow curve  text-secondary">
+                        <div class="d-flex  my-2 align-items-center" id="actSabPaisa">{{!-- actSabPaisa-
+                            data-bs-toggle="modal"
+                            data-bs-target="#exampleModal2" --}}
 
                             <h5 class="mb-0 mx-auto"> <span class="orange">Sab</span><span
                                     class="text-dark">Paisa</span> </h5>
 
                         </div>
                     </a>
-                    <a href="/paytmcheckout" id="paytmGateway"
+                    {{!-- /paytmcheckout data-bs-toggle="modal" data-bs-target="#exampleModal2"--}}
+                    <a href="" id="paytmGateway" data-bs-toggle="modal" data-bs-target="#exampleModal2"
                         class="swbtn my-2 mx-auto border btnshadow paytm curve  ">
                         <div class="d-flex  my-2 align-items-center">
                             <h5 class="mb-0 mx-auto">Pay<span style="color: #02B9EF;">tm</span> </h5>
 
                         </div>
                     </a>
-                    <a href="" id="rzp-button1" class="swbtn my-2 border mx-auto  curve btnshadow ">
+                    {{!-- rzp-button1 data-bs-toggle="modal" data-bs-target="#exampleModal3"--}}
+                    <a href="" id="" class="swbtn my-2 border mx-auto  curve btnshadow" data-bs-toggle="modal" data-bs-target="#exampleModal3">
                         <div class="d-flex  my-2 align-items-center">
                             <h5 class="mb-0 fst-italic mx-auto">RazorPay</h5>
-
-                        </div> 
+                        </div>
                     </a>
                     <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"
                         class="mx-auto swbtn my-2 curve btnshadow curve px-0 text-secondary">
@@ -55,22 +57,57 @@
 
         </div>
     </div>
-    <div class="row text-center d-none" id="homebtn"><div class="col-8 col-md-4 mx-auto ">
-        <a class="border px-5 py-2 bg-primary text-white h4 curve" href="/index">Home</a>
+    <div class="row text-center d-none" id="homebtn">
+        <div class="col-8 col-md-4 mx-auto ">
+            <a class="border px-5 py-2 bg-primary text-white h4 curve" href="/index">Home</a>
+        </div>
+
     </div>
-        
-    </div>
-    
+
 
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">GPay coming soon!!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>Hii , we are coming soon with Google Pay payment gateway. Till then use RazorPay
+                    <p>Hii , we are coming soon with Google Pay payment gateway. Till then use SabPaisa
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel2">Paytm coming soon!!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Hii , we are coming soon with Paytm payment gateway. Till then use SabPaisa
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel3" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel3">RazorPay coming soon!!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Hii , we are coming soon with RazorPay payment gateway. Till then use SabPaisa
                     </p>
                 </div>
                 <div class="modal-footer">
@@ -108,73 +145,96 @@
                 body: JSON.stringify({ keyId })
             });
             let orderData = await response.json();
-            // console.log("this is razorpay data==>", orderData.key);
-            // "rzp_test_V06gmAT3UstD3C"
-            // console.log(orderData.fname, orderData.phone, orderData.email);
-            var options = {
-                "key": orderData.key,
-                "amount": orderData.tamount * 100,
-                "currency": "INR",
-                "name": "Apna Khet Bagan Foundation",
-                "description": "Order transaction",
-                "order_id": orderData.id,
-                "handler": async function (response) {
-                    alertbar.classList.remove("d-none");
-                    alertbar.classList.remove("text-danger");
-                    alertbar.classList.add("text-success");
-                    alertmsg.innerText = `Payment Successful with txn ID ${response.razorpay_payment_id}`;
-                    payOptions.classList.add("d-none")
-                    homebtn.classList.remove("d-none")
+            console.log("data=>", orderData)
+            if (orderData.paymentstatus === 'success') {
+                alertbar.classList.remove("d-none");
+                alertbar.classList.remove("text-success");
+                alertbar.classList.add("text-danger");
+                alertmsg.innerText = "Transaction already made for this order, Add to cart and checkout for new Order";
+                homebtn.classList.remove("d-none")
+                payOptions.classList.add("d-none")
+            } else if (orderData.paymentstatus === 'absentKey') {
+                alertbar.classList.remove("d-none");
+                alertbar.classList.remove("text-success");
+                alertbar.classList.add("text-danger");
+                alertmsg.innerText = " Add to cart and checkout to pay for order";
+                homebtn.classList.remove("d-none")
+                payOptions.classList.add("d-none")
+            } else if (orderData.paymentstatus === 'err') {
+                alertbar.classList.remove("d-none");
+                alertbar.classList.remove("text-success");
+                alertbar.classList.add("text-danger");
+                alertmsg.innerText = " Ooopss! Something went wrong!! Please try Again";
+                homebtn.classList.remove("d-none")
+                payOptions.classList.add("d-none")
+            } else {
+                 // "rzp_test_V06gmAT3UstD3C"  orderData.key
+                var options = {
+                    "key": orderData.key,
+                    "amount": orderData.tamount * 100,
+                    "currency": "INR",
+                    "name": "Apna Khet Bagan Foundation",
+                    "description": "Order transaction",
+                    "order_id": orderData.id,
+                    "handler": async function (response) {
+                        alertbar.classList.remove("d-none");
+                        alertbar.classList.remove("text-danger");
+                        alertbar.classList.add("text-success");
+                        alertmsg.innerText = `Payment Successful with txn ID ${response.razorpay_payment_id}`;
+                        payOptions.classList.add("d-none")
+                        homebtn.classList.remove("d-none")
 
-                    //console.log("razor pay response-->", response)
-                    //alert(response.razorpay_payment_id);
-                    //alert(response.razorpay_order_id);
-                    //alert(response.razorpay_signature);
-                    razorpay_payment_id = response.razorpay_payment_id;
-                    razorpay_order_id = response.razorpay_order_id;
-                    razorpay_signature = response.razorpay_signature;
+                        //console.log("razor pay response-->", response)
+                        //alert(response.razorpay_payment_id);
+                        //alert(response.razorpay_order_id);
+                        //alert(response.razorpay_signature);
+                        razorpay_payment_id = response.razorpay_payment_id;
+                        razorpay_order_id = response.razorpay_order_id;
+                        razorpay_signature = response.razorpay_signature;
+                        const razorResponse = await fetch('/razorpay/response', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({ razorpay_payment_id, razorpay_order_id, razorpay_signature, email: orderData.email, mailitems: orderData.productArrayMail, amount: orderData.tamount, phone: orderData.phone })
+                        });
+
+                        // console.log("this is ", razorpay_payment_id, razorpay_order_id, razorpay_signature)
+
+
+                    },
+                    "prefill": {
+                        "name": orderData.fname,
+                        "email": orderData.email,
+                        "contact": orderData.phone
+                    },
+                };
+
+                var rzp1 = new Razorpay(options);
+                rzp1.on('payment.failed', async function (response) {
+                    alertbar.classList.remove("d-none");
+                    alertbar.classList.remove("text-success");
+                    alertbar.classList.add("text-danger");
+                    alertmsg.innerText = `${response.error.description}`;
+                    homebtn.classList.remove("d-none")
+                    // alert(response.error.code);
+                    // alert(response.error.description);
+                    // alert(response.error.source);
+                    // alert(response.error.step);
+                    // alert(response.error.reason);
+                    // alert(response.error.metadata.order_id);
+                    // alert(response.error.metadata.payment_id);
                     const razorResponse = await fetch('/razorpay/response', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
                         },
-                        body: JSON.stringify({ razorpay_payment_id, razorpay_order_id, razorpay_signature, email: orderData.email, mailitems: orderData.productArrayMail, amount: orderData.tamount, phone: orderData.phone })
+                        body: JSON.stringify({ code: response.error.code, errorDesc: response.error.description, failpayid: response.error.metadata.payment_id, email: orderData.email, mailitems: orderData.productArrayMail, amount: orderData.tamount, phone: orderData.phone })
                     });
-
-                    // console.log("this is ", razorpay_payment_id, razorpay_order_id, razorpay_signature)
-                    //let razorResponseData = await razorResponse.json();
-
-                },
-                "prefill": {
-                    "name": orderData.fname,
-                    "email": orderData.email,
-                    "contact": orderData.phone
-                },
-            };
-
-            var rzp1 = new Razorpay(options);
-            rzp1.on('payment.failed', async function (response) {
-                alertbar.classList.remove("d-none");
-                alertbar.classList.remove("text-success");
-                alertbar.classList.add("text-danger");
-                alertmsg.innerText = `${response.error.description}`;
-                homebtn.classList.remove("d-none")
-                // alert(response.error.code);
-                // alert(response.error.description);
-                // alert(response.error.source);
-                // alert(response.error.step);
-                // alert(response.error.reason);
-                // alert(response.error.metadata.order_id);
-                // alert(response.error.metadata.payment_id);
-                const razorResponse = await fetch('/razorpay/response', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ code: response.error.code, errorDesc: response.error.description, failpayid: response.error.metadata.payment_id, email: orderData.email, mailitems: orderData.productArrayMail, amount: orderData.tamount, phone: orderData.phone })
                 });
-            });
-            rzp1.open();
+                rzp1.open();
+            }
+
 
 
 
@@ -184,6 +244,11 @@
     </script>
     <script>
         document.getElementById('actSabPaisa').onclick = async function (e) {
+            let alertbar = document.getElementById("alertWarningrzr");
+            let alertmsg = document.getElementById("rzrMsg");
+            let payOptions = document.getElementById("payOptions");
+            let homebtn = document.getElementById("homebtn");
+            let modal = document.getElementById("modal-inner");
             e.preventDefault();
             console.log("hii");
 
@@ -200,24 +265,52 @@
                 body: JSON.stringify({ keyId })
             });
             let resSabPaisa = await sabPaisaResponse.json();
-            console.log("this shoulf be url oobj",resSabPaisa);
-            let furl = resSabPaisa.url;
-            console.log("this shoulf be url",furl);
-            window.open(resSabPaisa.url);
+            console.log("this shoulf be url oobj", resSabPaisa);
+            if (resSabPaisa.paymentstatus === 'success') {
+                alertbar.classList.remove("d-none");
+                alertbar.classList.remove("text-success");
+                alertbar.classList.add("text-danger");
+                alertmsg.innerText = "Transaction already made for this order, Add to cart and checkout for new Order";
+                homebtn.classList.remove("d-none")
+                payOptions.classList.add("d-none")
+            } else if (resSabPaisa.paymentstatus === 'absentKey') {
+                alertbar.classList.remove("d-none");
+                alertbar.classList.remove("text-success");
+                alertbar.classList.add("text-danger");
+                alertmsg.innerText = " Add to cart and checkout to pay for order";
+                homebtn.classList.remove("d-none")
+                payOptions.classList.add("d-none")
+            } else if (resSabPaisa.paymentstatus === 'err') {
+                alertbar.classList.remove("d-none");
+                alertbar.classList.remove("text-success");
+                alertbar.classList.add("text-danger");
+                alertmsg.innerText = " Ooopss! Something went wrong!! Please try Again";
+                homebtn.classList.remove("d-none")
+                payOptions.classList.add("d-none")
+            } else {
+                let furl = resSabPaisa.url;
+                console.log("this shoulf be url", furl);
+                window.open(resSabPaisa.url);
+            }
+
         }
     </script>
     <script>
-        function gotohome(){
+        function gotohome() {
             let curl = window.location.href;
             let gonewurl = curl.replace("/paymentOption", "/index")
             window.location.url = gonewurl;
         }
     </script>
+
+    {{!-- uncomment for google pay work --}}
     {{!--
-    <script src="/gpay.js"></script> --}}
-    {{!--
+    <script src="/gpay.js"></script>
+
     <script async src="https://pay.google.com/gp/p/js/pay.js" onload="onGooglePayLoaded()"></script> --}}
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    {{!-- uncomment to work razorpay --}}
+    {{!-- <script src="https://checkout.razorpay.com/v1/checkout.js"></script> --}}
 
     <body>
 

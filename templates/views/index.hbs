@@ -9,42 +9,58 @@
     <!-- ==================Navigation Started================================== -->
     {{>navbar}}
     <!-- ==========================Navigatioin Ended================================ -->
-    <div class="container ">
-        <div class="text-center  my-3">
-            <img src="/images/bgnew.jpeg" class="container-fluid" alt="">
+    <div class="coverpic ">
+        <div class="text-center  ">
+            <img src="/images/bgnew-min.jpeg" class="container-fluid px-0 " alt="">
         </div>
     </div>
+  {{>aboutInIndex}}
     <div class="topic text-center mx-auto my-2">
-        <h1 class="topictitle text-secondary">Our <span class="text-success">Products</span></h1>
+        <h1 class="topictitle text-secondary wow animate__animated animate__zoomIn">Our <span
+                class="text-warning">Products</span></h1>
     </div>
     <div class="text-center mx-auto px-3 mt-3">
-        <p> Hello there , we are dedicated to deliver fresh and natural mangoes which are grown chemical free to your
+        <p> Hello there , we are dedicated to deliver fresh and natural mangoes which are grown chemical residue free to your
             door step. We provide all variety of mangoes to our customers.</p>
     </div>
     {{>productCard}}
     <div class="">
         <div class="topic text-center mx-auto my-2">
-            <h1 class="topictitle text-secondary">Products <span class="text-warning">On Demand</span> </h1>
+            <h1 class="topictitle text-secondary wow animate__animated animate__fadeInUp">Fruits <span
+                    class="text-warning">On Demand</span> </h1>
+        </div>
+
+    </div>
+
+    <div class="row my-3 mx-auto justify-content-center w-100" id="fruitlistDemand">
+
+    </div>
+    {{>FruitOnDemandPopulate}}
+    <div class="">
+        <div class="topic text-center mx-auto my-2">
+            <h1 class="topictitle text-secondary wow animate__animated animate__fadeInUp">Products <span
+                    class="text-warning">On Demand</span> </h1>
         </div>
         <div class="text-center mx-auto px-3 mt-3">
             <p> Hello there , we are also dedicated to deliver fresh, natural and handmade products which we made on
-                demand to maintain its natural freshness and hygiene without using chemicals . Feel free to whatsapp Us
+                demand to maintain its natural freshness and hygiene without using any preservatives/Chemicals . Feel
+                free to whatsapp Us
                 and Demand
-                our very natural , fresh and chemical free products. We are very dedicated to deliver products to our
-                customers fresh and chemical free. </p>
+                our very natural , fresh and chemical residue free products. We are very dedicated to deliver products
+                to our
+                customers fresh and chemical residue free. </p>
         </div>
     </div>
 
     {{>demandProducts}}
     {{>demandProductPopulate}}
-    <div class="whatsappTool ">
+    <div class="whatsappTool wow animate__animated animate__fadeInRight animate__delay-2s">
         <a class="nav-link align-middle"
-            href="https://wa.me/+919113762945/?text=Hello%20there.%20I%20need%20your%20help." target="_blank"><i
+            href="https://wa.me/+919262290959/?text=Hello%20there.%20I%20need%20your%20help." target="_blank"><i
                 class="fa-brands fa-whatsapp"></i> Chat</a>
     </div>
     {{>footer}}
     {{>cdnscript}}
-    
 </body>
 
 </html>

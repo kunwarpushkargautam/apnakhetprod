@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+{{>head}}
+
+<body>
+    <div class="container mt-4">
+
+        <h2 class="text-center mx-auto bg-warning text-white py-2">Dashboard Console</h2>
+        <div class="row justify-content-center mx-auto">
+            <div class="col-5 text-center px-0 mx-1">
+                <form action="/adminlogout" method="post">
+                    <button class="borderless curve py-1 px-3"> <i class="fas fa-sign-out-alt"></i> Logout</button>
+                </form>
+            </div>
+        </div>
+        <div class="row text-center mx-auto justify-content-center">
+            <div class="col-5 col-md-4 col-lg-2 py-3 m-2  border px-1 curve shadow">
+                <a href="/adminorderoneday">
+                    <div class="order text-dark">
+                        <p class="mb-0 ">Day Orders</p>
+                        <h1 class="display-1 text-success"><strong>{{lastOneday}}</strong></h1>
+                    </div>
+                </a>
+            </div>
+            <div class="col-5 col-md-4 col-lg-2 py-3 m-2 border px-1 curve shadow">
+                <a href="/admincartStage">
+                    <div class="">
+                        <p class="mb-0 text-dark">Cart Stage</p>
+                        <h1 class="display-1 text-warning"> <strong>{{inCart}}</strong> </h1>
+                    </div>
+                </a>
+            </div>
+            <div class="col-5 col-md-4 col-lg-2 py-3 m-2 border px-1 curve shadow">
+                <a href="/adminpaymentDash">
+                    <div class="">
+                        <p class="mb-0 text-dark">Payments</p>
+                        <h1 class="display-1 text-primary"> <strong>{{failedPayment}}</strong> </h1>
+                    </div>
+                </a>
+            </div>
+            <div class="col-5 col-md-4 col-lg-2 py-3 m-2 border px-1 curve shadow">
+                <a href="/admintotaldata">
+                    <div class="">
+                        <p class="mb-0 text-dark">Total Data</p>
+                        <h1 class="display-1 text-dark"> <strong>{{total}}</strong> </h1>
+                    </div>
+                </a>
+            </div>
+            <div class="col-5 col-md-4 col-lg-2 py-3 m-2 border px-1 curve shadow">
+                <a href="/adminquerries">
+                    <div class="">
+                        <p class="mb-0 text-dark">Queries</p>
+                        <h1 class="display-1 text-secondary"> <strong>{{querry}}</strong> </h1>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    {{>cdnscript}}
+    {{>cartjs}}
+</body>
+
+</html>
